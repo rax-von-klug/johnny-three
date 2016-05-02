@@ -20,13 +20,13 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "botkit": "^0.1.1",
+    "dotenv": "^2.0.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.14",
     "requestify": "^0.1.17"
   },
   "devDependencies": {
-    "dotenv": "^2.0.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "proxyquire": "^1.7.4",

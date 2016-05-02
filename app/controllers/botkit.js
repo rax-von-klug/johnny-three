@@ -3,7 +3,7 @@
 /* Uses the slack button feature to offer a real time bot to multiple teams */
 var Botkit = require('botkit');
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/botkit_express_demo'
-var botkit_mongo_storage = require('../../config/botkit_mongo_storage')({mongoUri: mongoUri})
+var botkit_mongo_storage = require('../../config/botkit-storage-mongoose')({mongoUri: mongoUri})
 
 if (!process.env.SLACK_ID || !process.env.SLACK_SECRET || !process.env.PORT) {
     console.log('Error: Specify SLACK_ID SLACK_SECRET and PORT in environment');

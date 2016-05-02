@@ -13,7 +13,7 @@ module.exports = function(app) {
     app.get('/new', function(req, res) {
         console.log("================== START TEAM REGISTRATION ==================")
         
-        let auth_code = req.query.code;
+        var auth_code = req.query.code;
 
         if (!auth_code) {
             res.redirect('/');
@@ -25,11 +25,11 @@ module.exports = function(app) {
     });
 
     var perform_auth = function(auth_code, res) {
-        let base_url = 'https://slack.com/api/oauth.access?client_id=%s&client_secret=%s&code=%s&redirect_uri=%snew';
+        var base_url = 'https://slack.com/api/oauth.access?client_id=%s&client_secret=%s&code=%s&redirect_uri=%snew';
         var auth_adresse = util.format(base_url, process.env.SLACK_ID, process.env.SLACK_SECRET, auth_code, process.env.SLACK_REDIRECT);
 
         requestify.get(auth_adresse).then((res) => {
-            let auth = JSON.parse(body);
+            var auth = JSON.parse(body);
             console.log("New user auth");
             console.log(auth);
 

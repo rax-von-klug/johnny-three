@@ -132,27 +132,6 @@
       }
     });
 
-
-    // Tweetie
-    $('.lj-twitter-feed').twittie({
-      username: 'envato',
-      count: 3,
-      dateFormat: '%b %d',
-      hideReplies: true,
-      template: '<p><span>{{screen_name}}</span>{{tweet}}</p>',
-      apiPath: 'twitter/api/tweet.php'
-    }, function() {
-      var ticker = $('.lj-twitter-feed ul');
-      ticker.children('li:first').show().siblings().hide();        
-      setInterval(function() {
-        ticker.find('li:visible').fadeOut(500,function() {
-          $(this).appendTo(ticker);
-          ticker.children('li:first').fadeIn(500);
-        });
-      },5000);
-    });
-
-
     // scrollbar width
     function getScrollBarWidth() {
       var inner = document.createElement('p');

@@ -1,0 +1,1362 @@
+/*
+	Author: Lumberjacks
+	Template: Coffee Break (Landing Page)
+	Version: 1.0
+	URL: http://themeforest.net/user/Lumberjacks/
+*/
+
+
+
+/* TABLE OF CONTENTS
+
+	1. Import section
+	2. Basic styles
+	3. Typography
+	4. Menu
+	5. Header
+	6. Quotes
+	7. Features
+	8. Gallery
+	9. App Buttons
+	10. Pricing
+	11. FAQ
+	12. About
+	13. Twitter
+	14. Ready
+	15. Footer
+	16. Breakpoints
+
+*/
+
+
+
+/* 1. IMPORT SECTION */
+
+	@import url("bootstrap.css");
+	@import url("animate.css");
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+	@import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
+	@import url("font-awesome.min.css");
+	@import url("owl.carousel.css");
+	@import url("magnific-popup.css");
+
+
+
+/* 2. BASIC STYLES */
+
+	html,
+	body {
+		height: 100%;
+		width: 100%;
+	}
+
+	body {
+		font-size: 14px;
+		line-height: 1.5em;
+		font-family: 'Roboto', sans-serif;
+		background-color: #fff;
+		color: #262626;
+		font-weight: 300;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	a { 
+		color: #4fc1e9;
+		transition: all 0.25s ease-in-out 0s;
+		-moz-transition: all 0.25s ease-in-out 0s;
+		-webkit-transition: all 0.25s ease-in-out 0s;
+		-o-transition: all 0.25s ease-in-out 0s;
+		-ms-transition: all 0.25s ease-in-out 0s;
+	}
+
+	a:hover {
+		color: #4fc1e9;
+	}
+
+	a, a:hover, a:active, a:focus {
+		outline: 0;
+		border: 0;
+		text-decoration: none;
+	}
+
+	.lj-float-left {
+		float: left;
+	}
+
+	.lj-float-right {
+		float: right;
+	}
+	
+	.lj-block-center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.lj-show {
+		display: block !important;
+	}
+	
+	.lj-hide {
+		display: none !important;
+		visibility: hidden !important;
+	}
+
+
+
+/* 3. TYPOGRAPHY */
+
+	p {
+		line-height: 1.5;
+	}
+    
+	.lj-text-uppercase {
+		text-transform: uppercase;
+	}
+
+	.lj-text-center {
+		text-align: center;
+	}
+
+	.lj-text-left {
+		text-align: left;
+	}
+
+	.lj-text-right {
+		text-align: right;
+	}
+
+	.lj-text-justify {
+		text-align: justify;
+	}
+
+	.lj-text-underline {
+		text-decoration: underline;
+	}
+
+
+/* 4. MENU */
+
+	.lj-menu {
+		background-color: transparent;
+		width: 100%;
+		padding: 15px 90px;
+		margin-top: 20px;
+		position: absolute;
+		line-height: 1em;
+		z-index: 99;
+		transition: height 0.25s ease-in-out 0s;
+		-moz-transition: height 0.25s ease-in-out 0s;
+		-webkit-transition: height 0.25s ease-in-out 0s;
+		-o-transition: height 0.25s ease-in-out 0s;
+		-ms-transition: height 0.25s ease-in-out 0s;
+	}
+
+	.lj-menu.floating {
+		background-color: #fff;
+		margin-top: 0;
+		position: fixed;
+		box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.3);
+	}
+
+	.lj-menu.active {
+		height: 410px !important;
+	}
+
+	.lj-logo {
+		text-align: left;
+		z-index: 3;
+		display: inline-block;
+	}
+
+	.lj-logo img {
+	    vertical-align: bottom;
+	}
+	
+	.lj-menu .lj-logo a {
+		display: inline-block;
+	}
+
+	.lj-menu .lj-logo a.floating {
+		display: none;
+	}
+
+	.lj-menu.floating .lj-logo a {
+		display: none;
+	}
+
+	.lj-menu.floating .lj-logo a.floating {
+		display: inline-block;
+	}
+	
+	.lj-menu-list {
+		display: inline-block;
+		font-size: 0.9em;
+		position: absolute;
+		right: 0;
+		line-height: 44px;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+	}
+
+	.lj-menu .menu-icon {
+	  display: none;
+	  margin-right: 15px;
+	  margin-top: 4px;
+	  right: 0;
+	  position: absolute;
+	  width: 40px;
+	  -webkit-transform: translate3d(0, 0, 0);
+	  -moz-transform: translate3d(0, 0, 0);
+	  -ms-transform: translate3d(0, 0, 0);
+	  -o-transform: translate3d(0, 0, 0);
+	  transform: translate3d(0, 0, 0);
+	}
+
+	.lj-menu .menu-icon:before,
+	.lj-menu .menu-icon:after,
+	.lj-menu .menu-icon .menu-icon__text {
+	  background: #4fc1e9;
+	  -webkit-border-radius: 3px;
+	  -moz-border-radius: 3px;
+	  -ms-border-radius: 3px;
+	  -o-border-radius: 3px;
+	  border-radius: 3px;
+	  content: '';
+	  display: block;
+	  height: 4px;
+	  margin: 6px 0;
+	  -webkit-transition: all 0.2s ease-out;
+	  -moz-transition: all 0.2s ease-out;
+	  -ms-transition: all 0.2s ease-out;
+	  -o-transition: all 0.2s ease-out;
+	  transition: all 0.2s ease-out;
+	  width: 100%;
+	}
+
+	.lj-menu .menu-icon .menu-icon__text {
+	  text-indent: -9999px;
+	}
+
+	.lj-menu .menu-icon.active:before {
+	  -webkit-transform: rotate(45deg) translate3d(5px, 10px, 0);
+	  -moz-transform: rotate(45deg) translate3d(5px, 10px, 0);
+	  -ms-transform: rotate(45deg) translate3d(5px, 10px, 0);
+	  -o-transform: rotate(45deg) translate3d(5px, 10px, 0);
+	  transform: rotate(45deg) translate3d(5px, 10px, 0);
+	}
+
+	.lj-menu .menu-icon.active .menu-icon__text {
+	  opacity: 0;
+	}
+
+	.lj-menu .menu-icon.active:after {
+	  -webkit-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+	  -moz-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+	  -ms-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+	  -o-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+	  transform: rotate(-45deg) translate3d(5px, -10px, 0);
+	}
+
+	.lj-menu .lj-menu-list a {
+		color: #fff;
+	}
+
+	.lj-menu.floating .lj-menu-list a {
+		color: #262626;
+	}
+
+	.lj-menu .lj-menu-list a:hover {
+		color: #4fc1e9;
+	}
+
+	.lj-menu-list ul {
+		padding-left: 0;
+		list-style-type: none;
+		margin: 0;
+	}
+
+	.lj-menu-list li {
+		display: inline-block;
+		margin-right: 30px;
+	}
+
+	.lj-menu-list li.button {
+		margin-right: 5px;
+	}
+
+	.lj-menu .lj-menu-list .button a {
+		border: 2px solid #4fc1e9;
+		background-color: #4fc1e9;
+		border-radius: 4px;
+		padding: 10px 15px;
+		color: #fff;
+	}
+
+	.lj-menu.floating .lj-menu-list .button a {
+		color: #fff;
+	}
+
+	.lj-menu .lj-menu-list .button.ghost a {
+		color: #fff;
+		background-color: transparent;
+	}
+
+	.lj-menu.floating .lj-menu-list .button.ghost a {
+		color: #4fc1e9;
+	}
+
+	.lj-menu.floating .lj-menu-list .button.ghost a:hover {
+		color: #fff;
+	}
+
+	.lj-menu-list .button a:hover {
+		border: 2px solid #36a8d0;
+		background-color: #36a8d0;
+	}
+
+	.lj-menu-list .button.ghost a:hover {
+		background-color: #4fc1e9;
+		border: 2px solid #4fc1e9;
+		color: #fff;
+	}
+
+
+/* 5. HEADER */
+
+	header {
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+		background-color: #fff;
+		position: relative;
+	}
+	
+	header > .container {
+		height: 100%;
+		position: relative;
+		z-index: 1;
+		padding-top: 150px;
+		padding-bottom: 100px;
+	}
+
+	header > canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	.lj-overlay {
+		width: 100%;
+		height: 100%;		
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	
+	.lj-overlay-none {
+		display: none;
+		visibility: hidden;
+	}
+
+	.lj-overlay-image {
+		background-image: url('../img/dots.png');
+		background-repeat: repeat;
+	}
+	
+	.lj-overlay-color {
+	    background-color: rgba(0,0,0,0.1);
+	}
+	
+	.lj-overlay-gradient {
+		background: -moz-linear-gradient(215deg,  rgba(0,204,255,0.8) 0%, rgba(196,255,0,0.8) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(0,204,255,0.8)), color-stop(100%,rgba(196,255,0,0.8))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(215deg,  rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(215deg,  rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(215deg,  rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%); /* IE10+ */
+		background: linear-gradient(215deg,  rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ccff', endColorstr='#c4ff00',GradientType=1 ) progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/1x1.png'); /* IE6-9 fallback on horizontal gradient */
+		pointer-events:none;
+	}
+    
+  header h1 {
+  	font-family: 'Montserrat', sans-serif;
+  	font-size: 4em;
+  	font-weight: 400;
+    color: #fff;
+    word-wrap: break-word;
+    line-height: 1em;
+    display: inline-block;
+    margin-top: 30px;
+
+  }
+
+  header p {
+  	color: #fff;
+  	display: block;
+  	margin: 0;
+  	margin-top: 30px;
+  	margin-bottom: 50px;
+  	font-family: 'Montserrat', sans-serif;
+  	font-weight: 400;
+  	font-size: 1.4em;
+  	font-style: italic;
+  }
+
+  header img {
+  	width: 100%;
+  }
+
+  .lj-subscribe-form {
+  	margin-top: 30px;
+  	text-align: center;
+  }
+
+  .lj-subscribe-form form {
+  	display: inline-block;
+  	text-align: center;
+  	position: relative;
+  	width: 600px;
+  	max-width: 90%;
+  }
+
+  .lj-subscribe-form form > i {
+  	position: absolute;
+  	display: block;
+  	width: 30px;
+  	line-height: 60px;
+  	margin-left: 15px;
+  	color: #fff;
+  	font-size: 1.2em;
+  }
+
+  .lj-subscribe-form input[type=text] {
+  	width: 100%;
+  	height: 60px;
+  	display: block;
+  	padding: 0 100px 0 60px;
+  	font-size: 1.2em;
+  	font-weight: 100;
+  	background-color: rgba(255, 255, 255, 0.1);
+  	border: 1px solid transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+		line-height: 60px;
+		float: left;
+  }
+
+  .lj-subscribe-form input:focus {
+  	outline: 0;
+  }
+  
+  .lj-subscribe-form button {
+  	width: 100px;
+  	height: 60px;
+  	position: absolute;
+  	right: 0;
+  	display: block;
+  	padding: 0 10px;
+  	font-weight: 400;
+  	font-size: 1.2em;
+  	background-color: transparent;
+  	border: 1px solid transparent;
+    color: #fff;
+		transition: all 0.125s ease-in-out 0s;
+		-moz-transition: all 0.125s ease-in-out 0s;
+		-webkit-transition: all 0.125s ease-in-out 0s;
+		-o-transition: all 0.125s ease-in-out 0s;
+		-ms-transition: all 0.125s ease-in-out 0s;
+  }
+
+  .lj-subscribe-form button:hover {
+  	color: #fff;
+  }
+
+  .lj-subscribe-form button:focus,
+  .lj-subscribe-form button:active {
+  	outline: none;
+  }
+
+  .lj-subscribe-form button > span {
+  	display: inline;
+  	position: relative;
+  	left: 10px;
+		transition: left 0.25s ease-in-out 0s;
+		-moz-transition: left 0.25s ease-in-out 0s;
+		-webkit-transition: left 0.25s ease-in-out 0s;
+		-o-transition: left 0.25s ease-in-out 0s;
+		-ms-transition: left 0.25s ease-in-out 0s;
+  }
+
+  .lj-subscribe-form button:hover > span {
+  	left: 0;
+  }
+
+  .lj-subscribe-form button > i {
+  	display: inline-block;
+  	width: 20px;
+  	position: relative;
+  	left: 0;
+  	opacity: 0;
+  	color: #fff;
+		transition: all 0.25s ease-in-out 0s;
+		-moz-transition: all 0.25s ease-in-out 0s;
+		-webkit-transition: all 0.25s ease-in-out 0s;
+		-o-transition: all 0.25s ease-in-out 0s;
+		-ms-transition: all 0.25s ease-in-out 0s;
+  }
+
+  .lj-subscribe-form button:hover > i {
+  	left: 10px;
+  	opacity: 1;
+  }
+
+  .lj-subscribe-message {
+  	height: 2.5em;
+  	padding: 10px 20px;
+  	color: #fff;
+  	font-size: 1em;
+  	font-weight: 400;
+  	display: block;
+  }
+
+  .lj-subscribe-message i {
+  	margin-right: 5px;
+  }
+
+	.lj-subscribe-message .fa-warning {
+  	color: #ff5c5c;
+  }
+
+  .lj-subscribe-message .fa-check {
+  	color: #2ecc71;
+  }
+
+	.lj-subscribe-form .placeholder {
+		color: #fff;
+	}
+
+	.lj-subscribe-form input::-webkit-input-placeholder {
+	    color:    #fff;
+	}
+	.lj-subscribe-form input:-moz-placeholder {
+	   color:    #fff;
+	   opacity:  1;
+	}
+	.lj-subscribe-form input::-moz-placeholder {
+	   color:    #fff;
+	   opacity:  1;
+	}
+	.lj-subscribe-form input:-ms-input-placeholder {
+	   color:    #fff;
+	}
+
+	.lj-video-button a {
+		display: block;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 80px;
+    height: 80px;
+    background: url("../img/play.png");
+    opacity: 0.5;
+	}
+
+	.lj-video-button a:hover {
+		opacity: 1;
+	}
+
+
+/* 6. QUOTES */
+
+	.lj-quotes {
+		padding-top: 30px;
+		padding-bottom: 30px;
+		background-color: #4fc1e9;
+		color: #fff;
+		text-align: right;
+	}
+
+	.lj-quotes .quote {
+		text-align: left;
+	}
+
+	.lj-quotes .quote p {
+		display: inline;
+		line-height: 2em;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1em;
+		font-weight: 400;
+		font-style: italic;
+	}
+
+	.lj-quotes .quote p:before {
+		font-family: 'FontAwesome';
+		content: "\f10d";
+		color: #36A8D0;
+		font-size: 2em;
+		position: relative;
+		top: 5px;
+		margin-right: 10px;
+	}
+
+	.lj-quotes a {
+		color: #fff;
+		border: 2px solid #fff;
+		border-radius: 4px;
+		padding: 10px 15px;
+		display: inline-block;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		margin-left: 20px;
+	}
+
+	.lj-quotes a:hover {
+		color: #4fc1e9;
+		background-color: #fff;
+	}
+
+	.lj-quotes i {
+		margin-left: 10px;
+		position: relative;
+		top: 5px;
+		color: #36A8D0;
+		font-size: 2em;
+	}
+
+	.lj-quotes i:first-child {
+		margin-left: 0;
+	}
+
+
+/* 7. FEATURES */
+
+	.lj-features {
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+
+	.lj-features.color {
+		background-color: #fafafa;
+	}
+
+	.lj-features.no-padding-bottom {
+		padding-bottom: 0;
+	}
+
+	.lj-features h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		font-size: 2em;
+		line-height: 1.4em;
+	}
+
+	.lj-features p {
+		font-size: 1.4em;
+		font-weight: 400;
+	}
+
+	.lj-features ul {
+		list-style-type: none;
+		padding-left: 0;
+		margin-bottom: 30px;
+	}
+
+	.lj-features ul li {
+		margin-top: 10px;
+		font-weight: 400;
+		font-size: 1.2em;
+	}
+
+	.lj-features i {
+		font-size: 1em;
+		color: #4fc1e9;
+		margin-right: 20px;
+	}
+
+	.lj-features span {
+		font-size: 1em;
+		font-weight: 400;
+	}
+
+	.lj-features img {
+		max-width: 100%;
+	}
+
+
+/* 8. GALLERY */
+
+	.lj-gallery {
+		padding-top: 100px;
+		padding-bottom: 50px;
+	}
+
+	.lj-gallery.color {
+		background-color: #fafafa;
+	}
+
+	.lj-gallery img {
+		width: 100%;
+		padding: 0 20px;
+	}
+
+	.owl-controls {
+		margin-top: 20px;
+		text-align: center;
+	}
+
+	.owl-controls .owl-buttons div {
+		color: #fff;
+		display: inline-block;
+		zoom: 1;
+		*display: inline;
+		margin: 5px;
+		padding: 3px 10px;
+		font-size: 12px;
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+		background: #869791;
+		filter: Alpha(Opacity=50);
+		opacity: 0.5;
+	}
+
+	.owl-controls .owl-page{
+		display: inline-block;
+		zoom: 1;
+		*display: inline;
+	}
+
+	.owl-controls .owl-page span{
+		display: block;
+		width: 12px;
+		height: 12px;
+		margin: 5px 7px;
+		filter: Alpha(Opacity=50);
+		opacity: 0.5;
+		-webkit-border-radius: 20px;
+		-moz-border-radius: 20px;
+		border-radius: 20px;
+		background: #4fc1e9;
+	}
+
+	.owl-controls .owl-page.active span,
+	.owl-controls.clickable .owl-page:hover span{
+		filter: Alpha(Opacity=100);
+		opacity: 1;
+	}
+
+
+/* 9. APP BUTTONS */
+
+	.lj-app-buttons {
+		padding-top: 100px;
+		padding-bottom: 100px;
+		text-align: center;
+		position: relative;
+	}
+
+	.lj-app-buttons-overlay {
+		background-color: rgba(0, 0, 0, 0);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		content: "";
+	}
+
+	.lj-app-buttons h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		font-size: 2em;
+	  line-height: 1.4em;
+		color: #fff;
+	}
+
+	.lj-app-buttons ul {
+		padding-left: 0;
+		margin: 0;
+		line-height: 60px;
+	}
+
+	.lj-app-buttons li {
+		display: inline-block;
+	}
+
+	.lj-app-buttons a {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1.2em;
+		font-weight: 400;
+		padding: 15px 25px;
+		border: 2px solid #fff;
+		border-radius: 4px;
+		margin: 0 10px;
+		color: #fff;
+	}
+
+	.lj-app-buttons a:hover {
+		background-color: #fff;
+		border: 2px solid #fff;
+		color: #4fc1e9;
+	}
+
+
+/* 10. PRICING */
+
+	.lj-pricing {
+		padding-top: 100px;
+		text-align: center;
+	}
+
+	.lj-pricing h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+    font-size: 2em;
+	  line-height: 1.4em;
+    margin-top: 0;
+	}
+
+	.lj-pricing p {
+		font-size: 1.4em;
+  	font-weight: 400;
+	}
+
+	.lj-price-plan {
+		display: inline-block;
+		width: 100%;
+		max-width: 700px;
+		margin-top: 50px;
+		text-align: center;
+		padding: 100px 10px;
+		background-color: #fafafa;
+		border-radius: 4px;
+	}
+
+	.lj-price-plan i.icon {
+		color: #4fc1e9;
+		font-size: 3em;
+	}
+
+	.lj-price-plan h3 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		font-size: 1.5em;
+	}
+
+	.lj-price-plan ul {
+		padding-left: 0;
+		margin: 0;
+		list-style-type: none;
+	}
+
+	.lj-price-plan li {
+		display: block;
+		padding-bottom: 10px;
+		font-size: 1em;
+		font-weight: 400;
+	}
+
+	.lj-price-plan ul span {
+		display: inline;
+		padding: 5px 0;
+		border-bottom: 1px dotted #aaa;
+	}
+
+	.lj-price-plan a.price {
+		margin-top: 24px;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1.5em;
+		font-weight: 400;
+		color: #4fc1e9;
+		min-width: 150px;
+		display: inline-block;
+		border: 2px solid #4fc1e9;
+		border-radius: 4px;
+		padding: 10px 15px;
+	}
+
+	.lj-price-plan a.price:hover {
+		color: #fff;
+		background-color: #4fc1e9;
+	}
+
+
+/* 11. FAQ */
+
+	.lj-faq {
+		padding-top: 100px;
+		text-align: center;
+	}
+
+	.lj-faq h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+	  font-size: 2em;
+	  line-height: 1.4em;
+	}
+
+	.lj-faq p {
+		font-size: 1.4em;
+		font-weight: 400;
+	}
+
+	.lj-faq ul {
+		list-style-type: none;
+		padding-left: 0;
+		text-align: left;
+		margin-top: 50px;
+	}
+
+	.lj-faq li {
+		margin-top: 50px;
+	}
+
+	.lj-faq h3 {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1.5em;
+		font-weight: 400;
+		display: inline-block;
+		width: 100%;
+	}
+
+	.lj-faq ul p {
+		padding: 0 0 0 30px;
+		border-left: 3px solid #4fc1e9;
+		font-size: 1.2em;
+		font-weight: 300;
+	}
+
+
+/* 12. ABOUT */
+
+	.lj-about {
+		text-align: center;
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+
+	.lj-about h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+	  font-size: 2em;
+	  line-height: 1.4em;
+	}
+
+	.lj-about p {
+		font-size: 1.4em;
+		font-weight: 400;
+	}
+
+	.lj-about .portrait {
+		margin-top: 50px;
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+		max-width: 700px;
+	}
+
+	.lj-about .portrait .overlay {
+		position: absolute;
+		border-radius: 4px;
+		bottom: 0;
+		width: 100%;
+		height: 0;
+		background-color: rgba(79, 193, 233, 0.9);
+		transition: height 0.25s ease-in-out 0s;
+		-moz-transition: height 0.25s ease-in-out 0s;
+		-webkit-transition: height 0.25s ease-in-out 0s;
+		-o-transition: height 0.25s ease-in-out 0s;
+		-ms-transition: height 0.25s ease-in-out 0s;
+	}
+
+	.lj-about .portrait:hover .overlay {
+		height: 100%;
+	}
+
+	.lj-about .portrait img {
+		width: 100%;
+		border-radius: 4px;
+	}
+
+	.lj-about .portrait p {
+		position: absolute;
+		padding: 0 5px;
+		top: 100px;
+		color: #fff;
+		opacity: 0;
+		transition: all 0.125s linear 0s;
+		-moz-transition: all 0.125s linear 0s;
+		-webkit-transition: all 0.125s linear 0s;
+		-o-transition: all 0.125s linear 0s;
+		-ms-transition: all 0.125s linear 0s;
+	}
+
+	.lj-about .portrait:hover p {
+		top: 20px;
+		opacity: 1;
+		transition: all 0.25s ease-out 0.125s;
+		-moz-transition: all 0.25s ease-out 0.125s;
+		-webkit-transition: all 0.25s ease-out 0.125s;
+		-o-transition: all 0.25s ease-out 0.125s;
+		-ms-transition: all 0.25s ease-out 0.125s;
+	}
+
+	.lj-about .portrait ul {
+		list-style-type: none;
+		padding: 0;
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		color: #fff;
+		opacity: 0;
+		transition: all 0.125s linear 0s;
+		-moz-transition: all 0.125s linear 0s;
+		-webkit-transition: all 0.125s linear 0s;
+		-o-transition: all 0.125s linear 0s;
+		-ms-transition: all 0.125s linear 0s;
+	}
+
+	.lj-about .portrait:hover ul {
+		bottom: 20px;
+		opacity: 1;
+		transition: all 0.25s ease-out 0.25s;
+		-moz-transition: all 0.25s ease-out 0.25s;
+		-webkit-transition: all 0.25s ease-out 0.25s;
+		-o-transition: all 0.25s ease-out 0.25s;
+		-ms-transition: all 0.25s ease-out 0.25s;
+	}
+
+	.lj-about .portrait li {
+		display: inline;
+	}
+
+	.lj-about .portrait a {
+		color: #fff;
+		display: inline-block;
+		padding: 10px 15px;
+		margin: 0 5px;
+		border: 2px solid #fff;
+		border-radius: 4px;
+		font-size: 1.2em;
+		background-color: transparent;
+	}
+
+	.lj-about .portrait a:hover {
+		background-color: #fff;
+		color: #4fc1e9;
+	}
+
+	.lj-about h3 {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1.5em;
+		font-weight: 700;
+	}
+
+	.lj-about span {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1em;
+		font-weight: 400;
+	}
+
+/* 13. TWITTER */
+
+	.lj-twitter {
+		position: relative;
+		padding-top: 100px;
+		padding-bottom: 100px;
+		text-align: center;
+		min-height: 350px;
+		background-color: #fafafa;
+	}
+
+	.lj-twitter i {
+		color: #4fc1e9;
+		display: block;
+		margin-bottom: 30px;
+	}
+
+	.lj-twitter p {
+		font-size: 1.5em;
+		font-weight: 400;
+		line-height: 1.5em;
+	}
+
+	.lj-twitter span {
+		color: #4fc1e9;
+		font-weight: 400;
+	}
+
+	.lj-twitter ul {
+		list-style-type: none;
+		padding-left: 0;
+	}
+
+/* 14. READY */
+
+	.lj-ready {
+		padding-top: 100px;
+		padding-bottom: 100px;
+		text-align: center;
+		color: #fff;
+		background-color: #36a8d0;
+	}
+
+	.lj-ready h2 {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+    font-size: 2em;
+	  line-height: 1.4em;
+	}
+
+	.lj-ready p {
+		font-size: 1.4em;
+  	font-weight: 400;
+	}
+
+	.lj-ready a {
+		color: #fff;
+		display: inline-block;
+		padding: 10px 15px;
+		background-color: #4fc1e9;
+		border: 2px solid #4fc1e9;
+		border-radius: 4px;
+		margin-top: 10px;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 1.2em;
+		font-weight: 400;
+	}
+
+	.lj-ready a:hover {
+		background-color: #fff;
+		border: 2px solid #fff;
+		color: #4fc1e9;
+	}
+	    
+
+/* 15. FOOTER */
+
+	footer {
+		padding-top: 30px;
+		padding-bottom: 30px;
+		background-color: #4fc1e9;
+	}
+
+	footer p {
+		color: #fff;
+		margin: 0;
+		text-align: left;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+	}
+
+	footer ul {
+		list-style-type: none;
+		padding-left: 0;
+		margin: 0;
+		text-align: right;
+		line-height: 1em;
+	}
+
+	footer li {
+		display: inline;
+	}
+
+	footer a {
+		white-space: nowrap;
+		color: #4fc1e9;
+		font-size: 1.5em;
+		background-color: #36a8d0;
+		border-radius: 4px;
+		padding: 5px;
+	}
+
+	footer a:hover {
+		color: #fff;
+	}
+
+
+
+/* 16. BREAKPOINTS */
+
+	@media (max-width: 1199px) {
+
+		.lj-menu {
+			padding: 15px 45px;
+		}
+
+		header h1 {
+			margin-top: 0;
+			font-size: 3.5em;
+		}
+
+		.lj-about .portrait:hover p {
+			top: 0;
+		}
+
+	}
+
+	@media (max-width: 991px) {
+
+		.lj-menu {
+			padding: 15px 15px;
+		}
+
+		.lj-menu .lj-menu-list li {
+			margin-right: 10px;
+		}
+
+		.lj-menu .lj-menu-list .button a {
+			padding: 5px 10px;
+		}
+
+		header h1 {
+			font-size: 3em;
+		}
+
+		.lj-quotes i {
+			font-size: 1.5em;
+			top: 2px;
+		}
+
+		.lj-features {
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+		.lj-app-buttons {
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+		.lj-pricing {
+			padding-top: 50px;
+		}
+
+		.lj-price-plan {
+			padding: 50px 10px;
+		}
+
+		.lj-faq {
+			padding-top: 50px;
+		}
+
+		.lj-about {
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+		.lj-about .portrait a {
+			margin: 0 0;
+		}
+
+		.lj-about .portrait:hover ul {
+			bottom: 0;
+		}
+
+		.lj-about .portrait:hover p {
+			top: 0;
+		}
+
+		.lj-about .portrait a {
+			padding: 5px 10px;
+		}
+
+		.lj-twitter {
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+	}
+
+	@media (max-width: 767px) {
+
+		.lj-menu {
+			overflow: hidden;
+		}
+
+		.lj-menu .menu-icon {
+			display: inline-block;
+		}
+
+		.lj-menu .lj-menu-list {
+			right: auto;
+			left: 0;
+			top: 70px;
+			padding-left: 15px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.lj-menu .lj-menu-list li {
+			display: block;
+		}
+
+		.lj-menu .lj-menu-list li.button {
+			display: inline-block;
+		}
+
+		header > .container {
+			padding-top: 200px;
+			padding-bottom: 150px;
+		}
+
+		.lj-title > h1 {
+			font-size: 2.5em;
+			margin-top: 0;
+		}
+
+		.lj-quotes a {
+			margin-left: 0;
+			margin-top: 20px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.lj-app-buttons li {
+			width: 100%;
+		}
+
+		.lj-app-buttons a {
+			padding: 0;
+			display: block;
+			width: 100%;
+			margin: 10px 0;
+		}
+
+		.lj-price-plan {
+			padding: 30px 10px;
+		}
+
+		.lj-about p {
+			font-size: 1.4em;
+		}
+
+		.lj-about .portrait:hover ul {
+			bottom: 20px;
+		}
+
+		.lj-about .portrait:hover p {
+			top: 20px;
+		}
+
+		.lj-about .portrait a {
+			padding: 10px 15px;
+		}
+
+		.lj-twitter {
+			min-height: 410px;
+		}
+
+		footer p,
+		footer ul {
+			text-align: center;
+		}
+
+		footer ul {
+			margin-top: 20px;
+		}
+
+	}

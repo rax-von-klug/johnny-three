@@ -108,7 +108,7 @@
         </div>
         <!-- /FEATURES #1 -->
 
-        <!-- FEATURES #2 -->
+        <!-- FEATURES #2
         <div class="lj-features color">
             <div class="container">
                 <div class="row">
@@ -139,17 +139,15 @@
                 </div>
             </div>
         </div>
-        <!-- /FEATURES #2 -->
+        /FEATURES #2 -->
         <!-- SHOP BUTTONS -->
         <div id="app" class="lj-app-buttons">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2>Try our mobile application now, it's free!</h2>
+                        <h2>Start by integrating Johnny-Three with your Slack Team</h2>
                         <ul>
-                            <li><a href="#!">App Store <i class="fa fa-fw fa-apple"></i></a></li>
-                            <li><a href="#!">Google Play <i class="fa fa-fw fa-android"></i></a></li>
-                            <li><a href="#!">Windows Store <i class="fa fa-fw fa-windows"></i></a></li>
+                            <li><a href='https://slack.com/oauth/authorize?client_id=<%= process.env.SLACK_ID %>&redirect_uri=<%= process.env.SLACK_REDIRECT %>new&scope=bot'><img alt="Add to Slack" height="40" width="139" src="/images/add_to_slack.png"></a></li>
                         </ul>
                     </div>
                 </div>

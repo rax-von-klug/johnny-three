@@ -88,7 +88,14 @@
                             <form action="/subscribe" method="POST">
                                 <input type="text" value="<%= team.id %>" name="team_id" />
                                 <ul>
-                                    <li>Channel: <input type="text" name="channel" id="channel" /></li>
+                                    <li>Channel: 
+                                    <label>Area path:</label>
+                                        <select style="width: 200px;" name="channel" id="channel">
+                                        <% for(var i=0; i < team.channels.length; i++) { %>
+                                            <option value="<%= team.channels[i].id %>">#<%= team.channels[i].name %></option>
+                                        <% } %>
+                                        </select>
+                                    </li>
                                     <li>
                                         <label>Area path:</label>
                                         <select style="width: 200px;" name="area_path" id="area_path">

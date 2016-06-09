@@ -89,7 +89,7 @@ exports.create_subscription = function(options, callback) {
             'consumerActionId': 'httpRequest',
             'consumerId': 'webHooks',
             'consumerInputs': {
-                'url': process.env.SLACK_REDIRECT + '/workitem/create?team_id=' + options.team_id,
+                'url': process.env.SLACK_REDIRECT + 'workitem/create?team_id=' + options.team_id,
             },
             'publisherInputs': {
                 'areaPath': options.area_path,

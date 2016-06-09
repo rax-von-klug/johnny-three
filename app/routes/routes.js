@@ -1,4 +1,5 @@
-var Request = require('request')
+var Request = require('request');
+var _ = require('lodash');
 var slack = require('../controllers/botkit')
 var vsts = require('../factories/vsts');
 
@@ -17,7 +18,7 @@ module.exports = function(app) {
     var teamId = req.params.id;
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
-            res.render("admin", { team: { name: team.name }, areaPaths: areaPaths });
+            res.render("admin", { team: { id: team.id, name: team.name }, areaPaths: areaPaths });
         });
     });
   });
@@ -36,6 +37,28 @@ module.exports = function(app) {
       console.log("New user auth code " + auth_code);
       perform_auth(auth_code, res);
     }
+  });
+
+  app.post('/subscribe', function(req, res) {
+    var channel = req.body.channel;
+    var area_path = req.body.area_path;
+    var team_id = req.body.team_id;
+
+    // create vsts subscription
+    var subscription = vsts.create_subscription({ team_id: team_id, area_path: area_path }, function (subscription_id) {
+      // save subscription info
+      slack.controller.storage.teams.get(team_id, function(err, team) {
+        var team_subscription = { id: subscription_id, channel: channel };
+
+        if (!_.isArray(team.subscriptions)) {
+          team.subscriptions = [];
+        }
+
+        team.subscriptions.push(team_subscription);
+
+        slack.controller.saveTeam(team);
+      });
+    });
   });
 
   //CREATION ===================================================

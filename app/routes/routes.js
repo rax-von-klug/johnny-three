@@ -11,6 +11,10 @@ module.exports = function(app) {
 
     res.render('index'); // load view/root.html file
   });
+  
+  app.get('/create', function(req, res) {
+    res.render("new", { team: { name: 'Team' } });
+  });
 
   //new user creation - redirection from Slack
   app.get('/new', function(req, res) {

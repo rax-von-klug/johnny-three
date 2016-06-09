@@ -1,6 +1,5 @@
 var Request = require('request');
 var _ = require('lodash');
-var S = require('string');
 var slack = require('../controllers/botkit')
 var vsts = require('../factories/vsts');
 

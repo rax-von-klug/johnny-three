@@ -1,5 +1,6 @@
 var Request = require('request');
 var _ = require('lodash');
+var S = require('string');
 var slack = require('../controllers/botkit')
 var vsts = require('../factories/vsts');
 
@@ -48,7 +49,7 @@ module.exports = function(app) {
     var subscription = vsts.create_subscription({ team_id: team_id, area_path: area_path }, function (subscription_id) {
       // save subscription info
       slack.controller.storage.teams.get(team_id, function(err, team) {
-        var team_subscription = { id: subscription_id, channel: 'C0GB6ABCK', areaPath: area_path };
+        var team_subscription = { id: subscription_id, channel: 'C0GB6ABCK', areaPath: area_path.slice(1) };
 
         if (!_.isArray(team.subscriptions)) {
           team.subscriptions = [];

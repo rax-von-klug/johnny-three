@@ -18,7 +18,7 @@ module.exports = function(app) {
     var teamId = req.params.id;
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
-            res.render("admin", { team: { id: team.id, name: team.name }, areaPaths: areaPaths });
+            res.render("admin", { team: team, areaPaths: areaPaths });
         });
     });
   });
@@ -48,7 +48,7 @@ module.exports = function(app) {
     var subscription = vsts.create_subscription({ team_id: team_id, area_path: area_path }, function (subscription_id) {
       // save subscription info
       slack.controller.storage.teams.get(team_id, function(err, team) {
-        var team_subscription = { id: subscription_id, channel: 'C0GB6ABCK', areaPath: area_path };
+        var team_subscription = { id: subscription_id, channel: channel, areaPath: area_path };
 
         if (!_.isArray(team.subscriptions)) {
           team.subscriptions = [];

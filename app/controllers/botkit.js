@@ -22,6 +22,7 @@ exports.connect = function(team_config) {
     controller.trigger('create_bot', [bot, team_config]);
 }
 
+
 // just a simple way to make sure we don't
 // connect to the RTM twice for the same team
 var _bots = {};
@@ -48,14 +49,29 @@ controller.on('create_bot',function(bot,team) {
 
                 console.log("RTM ok");
 
-                controller.saveTeam(team, function(err, id) {
-                    if (err) {
-                        console.log("Error saving team")
+                bot.api.channels.list({
+                    token: bot.config.token
+                }, function(err, result) {
+                    if(!err) {
+                        team.channels = []
+                        if (result.channels) {
+                            for (var i = 0; i < result.channels.length; i++) {
+                                team.channels.push({
+                                    id: result.channels[i].id,
+                                    name: result.channels[i].name
+                                })
+                            }
+                        }
+                        controller.saveTeam(team, function(err, id) {
+                            if (err) {
+                                console.log("Error saving team")
+                            }
+                            else {
+                                console.log("Team " + team.name + " saved")
+                            }
+                        });
                     }
-                    else {
-                        console.log("Team " + team.name + " saved")
-                    }
-                });
+                });               
             }
             else{
                 console.log("RTM failed");

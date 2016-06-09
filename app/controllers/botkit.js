@@ -57,12 +57,13 @@ controller.on('create_bot',function(bot,team) {
                 console.log("RTM failed");
             }
 
-            bot.startPrivateConversation({user: team.createdBy},function(err,convo) {
+            bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
+                //console.log(JSON.stringify(convo));
                 if (err) {
                     console.log(err);
                 } else {
-                    convo.say('I am a bot that has just joined your team');
-                    convo.say('You must now /invite me to a channel so that I can be of use!');
+                    convo.say('Hi! I\'m Johnny-Three, Human / VSTS relations');
+                    convo.say('To start receiving your VSTS notifications please visit http://johnny-three.herokuapp.com/admin/' + team.id);
                 }
             });
 

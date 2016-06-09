@@ -12,8 +12,8 @@ module.exports = function(app) {
     res.render('index'); // load view/root.html file
   });
   
-  app.get('/create', function(req, res) {
-    res.render("new", { team: { name: 'Team' } });
+  app.get('/admin', function(req, res) {
+    res.render("admin", { team: { name: 'Team' } });
   });
 
   //new user creation - redirection from Slack

@@ -85,18 +85,21 @@
                             <!-- PRICING PLAN #1-->
                             <i class="fa fa-clock-o icon"></i>
                             <h3>Work Item Created</h3>
-                            <ul>
-                                <li>Channel: <input type="text" /></li>
-                                <li>
-                                    <label>Area path:</label>
-                                    <select style="width: 200px;">
-                                    <% for(var i=0; i < areaPaths.length; i++) { %>
-                                        <option value="<%= areaPaths[i].id %>"><%= areaPaths[i].path %></option>
-                                    <% } %>
-                                    </select>
-                                </li>
-                            </ul>
-                            <a href="#app" class="price slide">Subscribe</a>
+                            <form action="/subscribe" method="POST">
+                                <input type="text" value="<%= team.id %>" name="team_id" />
+                                <ul>
+                                    <li>Channel: <input type="text" name="channel" id="channel" /></li>
+                                    <li>
+                                        <label>Area path:</label>
+                                        <select style="width: 200px;" name="area_path" id="area_path">
+                                        <% for(var i=0; i < areaPaths.length; i++) { %>
+                                            <option value="<%= areaPaths[i].id %>"><%= areaPaths[i].path %></option>
+                                        <% } %>
+                                        </select>
+                                    </li>
+                                </ul>
+                                <button type="submit" class="price slide">Subscribe</a>
+                            </form>
                             <!-- /PRICING PLAN #1-->
                         </div>
                     </div>

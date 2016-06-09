@@ -8,8 +8,8 @@ module.exports = function(app) {
         slack.controller.storage.teams.get(teamId, function(err, team) {
             if(!err && team.subscriptions) {
                 for (var i=0; i < team.subscriptions.length; i++) {
-                    if(team.subscriptions[i].id == workItem.id) {
-                        var message = 'Work item created: #' + workItem.resource.id + ': ' + workItem.resource.fields['System.Title'];
+                    if(team.subscriptions[i].areaPath == workItem.resource.fields['System.AreaPath']) {
+                        var message = '*Work item created: #' + workItem.resource.id + ':* ' + workItem.resource.fields['System.Title'];
                         var bot = slack.getExistingBot(team.bot.token);
                         
                         bot.say({

@@ -1,5 +1,6 @@
 var Request = require('request')
 var slack = require('../controllers/botkit')
+var vsts = require('../factories/vsts');
 
 // frontend routes =========================================================
 module.exports = function(app) {
@@ -12,8 +13,13 @@ module.exports = function(app) {
     res.render('index'); // load view/root.html file
   });
   
-  app.get('/admin', function(req, res) {
-    res.render("admin", { team: { name: 'Team' } });
+  app.get('/admin/:id', function(req, res) {
+    var teamId = req.params.id;
+    slack.controller.storage.teams.get(teamId, function(err, team) {
+        vsts.getAreaPaths(function (areaPaths) {
+            res.render("admin", { team: { name: team.name }, areaPaths: areaPaths });
+        });
+    });
   });
 
   //new user creation - redirection from Slack

@@ -29,7 +29,7 @@ require('./app/routes/routes')(app);
 app.set('port', (process.env.PORT));
 
 //botkit (apres port)
-require('./app/controllers/botkit')
+require('./app/controllers/botkit');
 
 //START ===================================================
 http.listen(app.get('port'), function(){

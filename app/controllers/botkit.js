@@ -30,6 +30,10 @@ function trackBot(bot) {
     _bots[bot.config.token] = bot;
 }
 
+exports.getExistingBot = function(token) {
+    return _bots[token];
+}
+
 controller.on('create_bot',function(bot,team) {
 
     if (_bots[bot.config.token]) {

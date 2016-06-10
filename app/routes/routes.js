@@ -18,7 +18,9 @@ module.exports = function(app) {
     var teamId = req.params.id;
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
-            res.render("admin", { team: team, areaPaths: areaPaths });
+          vsts.getRepos(function (repos) {
+            res.render("admin", { team: team, areaPaths: areaPaths, repos: repos });
+          });
         });
     });
   });

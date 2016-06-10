@@ -18,7 +18,9 @@ module.exports = function(app) {
     var teamId = req.params.id;
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
-            res.render("admin", { team: team, areaPaths: areaPaths });
+          vsts.getRepos(function (repos) {
+            res.render("admin", { team: team, areaPaths: areaPaths, repos: repos });
+          });
         });
     });
   });
@@ -44,6 +46,16 @@ module.exports = function(app) {
     var area_path = req.body.area_path;
     var team_id = req.body.team_id;
 
+    // TODO tweak this object to support pull requests, with data coming back from the UI
+    var event = {
+      type: 'workitem.created',
+      inputs: {
+        'areaPath': area_path,
+        'workItemType': '',
+        'projectId': '7b8849b0-6d6a-422b-833f-8f962400b781'
+      }
+    }
+
     // create vsts subscription
     var subscription = vsts.create_subscription({ team_id: team_id, area_path: area_path }, function (subscription_id) {
       // save subscription info
@@ -58,7 +70,7 @@ module.exports = function(app) {
 
         slack.controller.saveTeam(team);
       });
-    });
+    }, event);
   });
 
   //CREATION ===================================================

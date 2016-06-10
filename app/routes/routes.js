@@ -19,7 +19,7 @@ module.exports = function(app) {
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
           vsts.getRepos(function (repos) {
-            res.render("admin", { team: team, areaPaths: areaPaths, repos: repos });
+            res.render("adminmod", { team: team, areaPaths: areaPaths, repos: repos });
           });
         });
     });
@@ -46,7 +46,6 @@ module.exports = function(app) {
     var area_path = req.body.area_path;
     var team_id = req.body.team_id;
 
-    // TODO tweak this object to support pull requests, with data coming back from the UI
     var event = {
       type: 'workitem.created',
       inputs: {
@@ -69,6 +68,38 @@ module.exports = function(app) {
         team.subscriptions.push(team_subscription);
 
         slack.controller.saveTeam(team);
+        res.end();
+      });
+    }, event);
+  });
+
+  app.post('/subscribe_pull', function(req, res) {
+    var channel = req.body.channelPr;
+    var repo = req.body.repo;
+    var team_id = req.body.team_id_pr;
+
+    var event = {
+      type: 'git.pullrequest.created',
+      inputs: {
+        'repository': repo,
+        'projectId': '7b8849b0-6d6a-422b-833f-8f962400b781'
+      }
+    }
+
+    // create vsts subscription
+    var subscription = vsts.create_subscription({ team_id: team_id }, function (subscription_id) {
+      // save subscription info
+      slack.controller.storage.teams.get(team_id, function(err, team) {
+        var team_subscription = { id: subscription_id, channel: channel, repositoryId: repo };
+
+        if (!_.isArray(team.subscriptions)) {
+          team.subscriptions = [];
+        }
+
+        team.subscriptions.push(team_subscription);
+
+        slack.controller.saveTeam(team);
+        res.end();
       });
     }, event);
   });

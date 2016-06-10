@@ -93,7 +93,15 @@ exports.getRepos = function(callback) {
     });
 }
 
-exports.create_subscription = function(options, callback) {
+exports.create_subscription = function(options, callback, event) {
+    var consumerUrl;
+
+    if(event.type === 'git.pullrequest.created') {
+        consumerUrl = process.env.SLACK_REDIRECT + 'pullrequest/create?team_id=' + options.team_id;
+    } else if (event.type === 'workitem.created'){
+        consumerUrl = process.env.SLACK_REDIRECT + 'workitem/create?team_id=' + options.team_id;
+    }
+
     request({
         url: 'https://chrislund.visualstudio.com/defaultcollection/_apis/hooks/subscriptions?api-version=1.0',
         headers: {
@@ -104,17 +112,13 @@ exports.create_subscription = function(options, callback) {
         json: true,
         body: {
             'publisherId': 'tfs',
-            'eventType': 'workitem.created',
+            'eventType': event.type,
             'consumerActionId': 'httpRequest',
             'consumerId': 'webHooks',
             'consumerInputs': {
-                'url': process.env.SLACK_REDIRECT + 'workitem/create?team_id=' + options.team_id,
+                'url': consumerUrl,
             },
-            'publisherInputs': {
-                'areaPath': options.area_path,
-                'workItemType': '',
-                'projectId': '7b8849b0-6d6a-422b-833f-8f962400b781'
-            }
+            'publisherInputs': event.inputs
         }
     }, function (error, response, body) {
         if (!error) {

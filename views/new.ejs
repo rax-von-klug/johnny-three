@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        <title>Johnny Three - Interactive Connections Slack Bot</title>
+        <title>Jonne-3 - Human - VSTS relations</title>
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="shortcut icon" href="/img/favicon.png">
 
         <!-- Main CSS file -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/style.css">
 
         <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -19,119 +19,103 @@
     </head>
     <body>
         <!-- MENU -->
-        <div class="lj-menu">
-            <div class="row">
-                <div class="col-sm-12">
-                    <!-- LOGO -->
-                    <div class="lj-logo">
-                        <a href="#header" class="slide" title="">
-                            <img src="img/logo.png" data-retina-src="img/logo@2x.png" alt="">
-                        </a>
-                        <a href="#header" class="slide floating" title="">
-                            <img src="img/logo-floating.png" data-retina-src="img/logo-floating@2x.png" alt="">
-                        </a>
-                    </div>
-                    <!-- /LOGO -->
-
-                    <!-- MOBILE MENU BUTTON -->
-                    <a href="#!" class="menu-icon">
-                        <span class="menu-icon__text">Show Menu</span>
-                    </a>
-                    <!-- /MOBILE MENU BUTTON -->
-
-                    <!-- MENU LIST -->
-                    <div class="lj-menu-list">
-                        <ul>
-                            <li><a href="#header" class="slide">Home</a></li>
-                            <li><a href="#features" class="slide">Features</a></li>
-                        </ul>
-                    </div>
-                    <!-- /MENU LIST -->
-                </div>
+        <nav class="navbar navbar-fixed-top navbar-default fixednav" role="navigation">
+            <div class="navbar-header">
+                <!-- begin logo in navigation -->
+                <a class="go" href="/"><img src="/img/jonne-3-logo_blue.png" alt=""></a>
+                <!-- end logo in navigation -->
             </div>
-        </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- begin navigation items -->
+                    <li><a href="#header" class="slide">Home</a></li>
+                    <li><a href="#features" class="slide">Subscriptions</a></li>
+                    <!-- end navigation items -->
+                </ul>
+            </div>
+        </nav>        
         <!-- /MENU -->
         <!-- HEADER -->
-        <header id="header">
-            <!-- HEADER OVERLAY --> 
-            <div class="lj-overlay lj-overlay-color"></div>
-            <!-- /HEADER OVERLAY -->
+        <div class="jumbotron">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-7">
-                        <p>Welcome <%= team.name %>, I am Johnny-Three your personal assisstant slack bot.</p>
+                    <div class="col-sm-12 col-md-2 col-md-offset-9 text-center">
+                        <button class="button button-login" type="button">Login</button>
                     </div>
-                    <!-- HEADER IMAGE -->
-                    <div class="col-sm-5 hidden-xs">
-                        <img src="img/header.png" alt="">
-                    </div>
-                    <!-- /HEADER IMAGE -->
-                </div>
-            </div>
-        </header>
-        <!-- /HEADER -->
-        <!-- PRICING -->
-        <div id="pricing" class="lj-pricing">
-            <div class="container">
+                </div>            
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <!-- PRICING HEADING -->
-                        <h2>Try it before you buy it!</h2>
-                        <p>Start your 14-day free trial now and enjoy all features. It's easy to upgrade to any of our plans later!</p>
-                        <!-- /PRICING HEADING -->
+                    <div class="col-md-12">
+                        <div class="logo">
+                            <a href="/">
+                                <img src="/img/jonne-3-title-image.png" />
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="lj-price-plan">
-                            <!-- PRICING PLAN #1-->
-                            <i class="fa fa-clock-o icon"></i>
-                            <h3>Work Item Created</h3>
-                            <ul>
-                                <li>Channel: <input type="text" /></li>
-                                <li>
-                                    <select>
-                                        <option>Team Name 1</option>
-                                        <option>Team Name 1</option>
-                                        <option>Team Name 1</option>
-                                    </select>
-                                </li>
-                            </ul>
-                            <a href="#app" class="price slide">Subscribe</a>
-                            <!-- /PRICING PLAN #1-->
+                    <div class="col-md-12">
+                        <h1>
+                            Welcome <strong><%= team.name %></strong>, I am Jonne-3 Human / VSTS relations. 
+                            You can manage your VSTS subscriptions below.
+                        </h1>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="se-section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6 se-feature-style-3">
+                                        <div class="feature-wrap">
+                                            <i class="icon ion-ios-analytics-outline"></i>
+                                            <h3>Work Item Created</h3>
+                                            <input type="hidden" value="<%= team.id %>" name="team_id" id="team_id" />
+                                            <div class="form-group">
+                                                <label for="channel">Team Channel</label>
+                                                <select name="channel" id="channel"  class="form-control">
+                                                    <% for(var i=0; i < team.channels.length; i++) { %>
+                                                        <option value="<%= team.channels[i].id %>">#<%= team.channels[i].name %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="areaPath">Area Path</label>
+                                                <select name="area_path" id="area_path" class="form-control">
+                                                    <% for(var i=0; i < areaPaths.length; i++) { %>
+                                                        <option value="<%= areaPaths[i].id %>"><%= areaPaths[i].path %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>                            
+                                            <p>Select the Work Item Area Path you wish to subscribe too, then choose which channel you would like the notifications sent too.</p>
+                                            <div class="lj-quotes">
+                                                <a href="#" class="subscribe">Subscribe</a>
+                                            </div>
+                                            <div class="alert alert-success subscribed" role="alert"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Subscribed</div>
+                                        </div> <!-- end feature-wrap -->
+                                    </div> <!-- end se-feature-style-3 -->
+
+                                </div> <!-- end row -->
+                            </div> <!-- end container -->                       
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /PRICING -->
-        <!-- FOOTER -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p>&copy; All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- /FOOTER -->
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <!-- Backstretch -->
-        <script src="js/jquery.backstretch.min.js"></script>
+        <script src="/js/jquery.backstretch.min.js"></script>
         <!-- Smoothscroll -->
-        <script src="js/smooth-scroll.js"></script>
+        <script src="/js/smooth-scroll.js"></script>
         <!-- jQuery Easings -->
-        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="/js/jquery.easing.1.3.js"></script>
         <!-- Owl Carousel js -->
-        <script src="js/owl.carousel.js"></script>
+        <script src="/js/owl.carousel.js"></script>
         <!-- Flat Surface Shader -->
-        <script src="js/fss.js"></script>
-        <script src="js/fss-settings.js"></script>
+        <script src="/js/fss.js"></script>
+        <script src="/js/fss-settings.js"></script>
         <!-- Retina Display -->
-        <script src="js/retinadisplay.js"></script>
+        <script src="/js/retinadisplay.js"></script>
         <!-- Magnific Popup -->
-        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="/js/jquery.magnific-popup.min.js"></script>
         <!-- Coffee Break js scripts -->
-        <script src="js/lj-coffee-break.js"></script>
+        <script src="/js/lj-coffee-break.js"></script>
     </body>
 </html>

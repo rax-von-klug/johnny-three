@@ -12,6 +12,8 @@
     // Setting default easing
     jQuery.easing.def = "easeInOutExpo";
 
+        $(".subscribe").show();
+        $(".subscribed").hide();
 
     // Backgrounds
     $('.lj-app-buttons').backstretch("img/bg-module.jpg");
@@ -206,4 +208,24 @@
 
     });
 
+    $(".subscribe").click(function() {
+      var channel = $("#channel").val();
+      var areapath = $("#areapath").val();
+      var team_id = $("#team_id").val();
+
+      var data = {
+        channel: channel,
+        area_path: areapath,
+        team_id: team_id
+      }
+
+      $.ajax({
+        "url": "/subscribe",
+        "method": "POST",
+        "data": data
+      }).success(function() { 
+        $(".subscribe").hide();
+        $(".subscribed").show();
+      });;
+    });
   });

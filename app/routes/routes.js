@@ -126,7 +126,14 @@ module.exports = function(app) {
           };
           
           startBot(team);
-          res.render("new", { team: team });
+
+          slack.controller.storage.teams.get(team.id, function(err, team) {
+              vsts.getAreaPaths(function (areaPaths) {
+                vsts.getRepos(function (repos) {
+                  res.render("new", { team: team, areaPaths: areaPaths, repos: repos });
+                });
+              });
+          });
 
           saveUser(auth, identity);
         }

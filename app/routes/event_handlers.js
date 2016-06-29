@@ -33,14 +33,15 @@ module.exports = function(app) {
             if(!err && team.subscriptions) {
                 for (var i=0; i < team.subscriptions.length; i++) {
                     if(team.subscriptions[i].repositoryId == pullRequest.resource.repository.id) {
+                        var pull_request_url = pullRequest.resource.repository.remoteUrl + "/pullrequest/" + pullRequest.resource.pullRequestId;
                         var attachment = [
                             {
                                 "mrkdwn_in": ["text", "pretext", "fields"],
                                 "fallback": "Required plain-text summary of the attachment.",
                                 "color": "#36a64f",
-                                "pretext": "<" + pullRequest.resource.url + "|Pull Request #" + pullRequest.resource.pullRequestId + "> created by " + pullRequest.resource.createdBy.displayName,
+                                "pretext": "<" + pull_request_url + "|Pull Request #" + pullRequest.resource.pullRequestId + "> created by " + pullRequest.resource.createdBy.displayName,
                                 "author_name": pullRequest.resource.repository.name,
-                                "author_link": pullRequest.resource.repository.url,
+                                "author_link": pullRequest.resource.repository.remoteUrl,
                                 "title": pullRequest.resource.title,
                                 "text": pullRequest.resource.description,
                                 "fields": [
@@ -56,7 +57,7 @@ module.exports = function(app) {
                                     }
                                 ],
                                 "footer": "Visual Studio Team Services API",
-                                "footer_icon": process.env.SLACK_REDIRECT + "public/img/vsts.png"
+                                "footer_icon": process.env.SLACK_REDIRECT + "img/vsts.png"
                             }
                         ];
                         var bot = slack.getExistingBot(team.bot.token);

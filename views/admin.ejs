@@ -85,14 +85,42 @@
                                             </div>                            
                                             <p>Select the Work Item Area Path you wish to subscribe too, then choose which channel you would like the notifications sent too.</p>
                                             <div class="lj-quotes">
-                                                <a href="#" class="subscribe">Subscribe</a>
+                                                <a href="#" class="subscribe-workitem">Subscribe</a>
+                                                <div class="alert alert-success subscribed-workitem" role="alert"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Subscribed</div>
                                             </div>
-                                            <div class="alert alert-success subscribed" role="alert"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Subscribed</div>
                                         </div> <!-- end feature-wrap -->
                                     </div> <!-- end se-feature-style-3 -->
 
+                                    <div class="col-md-4 col-sm-6 se-feature-style-3">
+                                        <div class="feature-wrap">
+                                            <i class="icon ion-ios-analytics-outline"></i>
+                                            <h3>Pull Request Created</h3>
+                                            <input type="hidden" value="<%= team.id %>" name="team_id_pr" id="team_id_pr" />
+                                            <div class="form-group">
+                                                <label for="channel">Team Channel</label>
+                                                <select name="channel" id="channelPr"  class="form-control">
+                                                    <% for(var i=0; i < team.channels.length; i++) { %>
+                                                        <option value="<%= team.channels[i].id %>">#<%= team.channels[i].name %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="areaPath">GIT Repository</label>
+                                                <select name="repo" id="repo" class="form-control">
+                                                    <% for(var i=0; i < repos.length; i++) { %>
+                                                        <option value="<%= repos[i].id %>"><%= repos[i].name %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>                            
+                                            <p>Select the Repository you wish to subscribe too, then choose which channel you would like the notifications sent too.</p>
+                                            <div class="lj-quotes">
+                                                <a href="#" class="subscribe-pullrequest">Subscribe</a>
+                                                <div class="alert alert-success subscribed-pullrequest" role="alert"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Subscribed</div>
+                                            </div>
+                                        </div> <!-- end feature-wrap -->
+                                    </div> <!-- end se-feature-style-3 -->
                                 </div> <!-- end row -->
-                            </div> <!-- end container -->                       
+                            </div> <!-- end container -->                    
                         </div>
                     </div>
                 </div>

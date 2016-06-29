@@ -12,8 +12,11 @@
     // Setting default easing
     jQuery.easing.def = "easeInOutExpo";
 
-        $(".subscribe").show();
-        $(".subscribed").hide();
+    $(".subscribe-workitem").show();
+    $(".subscribed-workitem").hide();
+
+    $(".subscribe-pullrequest").show();
+    $(".subscribed-pullrequest").hide();
 
     // Backgrounds
     $('.lj-app-buttons').backstretch("img/bg-module.jpg");
@@ -208,24 +211,45 @@
 
     });
 
-    $(".subscribe").click(function() {
-      var channel = $("#channel").val();
-      var areapath = $("#areapath").val();
-      var team_id = $("#team_id").val();
+    $(".subscribe-workitem").click(function() {
+        var channel = $("#channel").val();
+        var areapath = $("#area_path").val();
+        var team_id = $("#team_id").val();
 
-      var data = {
-        channel: channel,
-        area_path: areapath,
-        team_id: team_id
-      }
+        var data = {
+            channel: channel,
+            area_path: areapath,
+            team_id: team_id
+        }
 
-      $.ajax({
-        "url": "/subscribe",
-        "method": "POST",
-        "data": data
-      }).success(function() { 
-        $(".subscribe").hide();
-        $(".subscribed").show();
-      });;
+        $.ajax({
+            "url": "/subscribe",
+            "method": "POST",
+            "data": data
+        }).success(function() { 
+            $(".subscribe-workitem").hide();
+            $(".subscribed-workitem").show();
+        });
     });
+
+    $(".subscribe-pullrequest").click(function() {
+        var channel = $("#channelPr").val();
+        var repo = $("#repo").val();
+        var team_id = $("#team_id_pr").val();
+
+        var data = {
+            channel: channel,
+            repo: repo,
+            team_id: team_id
+        }
+
+        $.ajax({
+            "url": "/subscribe_pull",
+            "method": "POST",
+            "data": data
+        }).success(function() { 
+            $(".subscribe-pullrequest").hide();
+            $(".subscribed-pullrequest").show();
+        });
+    });    
   });

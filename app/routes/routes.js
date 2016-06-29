@@ -19,7 +19,7 @@ module.exports = function(app) {
     slack.controller.storage.teams.get(teamId, function(err, team) {
         vsts.getAreaPaths(function (areaPaths) {
           vsts.getRepos(function (repos) {
-            res.render("adminmod", { team: team, areaPaths: areaPaths, repos: repos });
+            res.render("admin", { team: team, areaPaths: areaPaths, repos: repos });
           });
         });
     });
@@ -74,9 +74,9 @@ module.exports = function(app) {
   });
 
   app.post('/subscribe_pull', function(req, res) {
-    var channel = req.body.channelPr;
+    var channel = req.body.channel;
     var repo = req.body.repo;
-    var team_id = req.body.team_id_pr;
+    var team_id = req.body.team_id;
 
     var event = {
       type: 'git.pullrequest.created',

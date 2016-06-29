@@ -33,11 +33,36 @@ module.exports = function(app) {
             if(!err && team.subscriptions) {
                 for (var i=0; i < team.subscriptions.length; i++) {
                     if(team.subscriptions[i].repositoryId == pullRequest.resource.repository.id) {
-                        var message = 'Pull request created by ' + pullRequest.resource.createdBy.displayName + ': ' + pullRequest.resource.title + '\r\n' + pullRequest.resource.url;
+                        var attachment = [
+                            {
+                                "mrkdwn_in": ["text", "pretext", "fields"],
+                                "fallback": "Required plain-text summary of the attachment.",
+                                "color": "#36a64f",
+                                "pretext": "<" + pullRequest.resource.url + "|Pull Request #" + pullRequest.resource.pullRequestId + "> created by " + pullRequest.resource.createdBy.displayName,
+                                "author_name": pullRequest.resource.repository.name,
+                                "author_link": pullRequest.resource.repository.url,
+                                "title": pullRequest.resource.title,
+                                "text": pullRequest.resource.description,
+                                "fields": [
+                                    {
+                                        "title": "",
+                                        "value": "",
+                                        "short": false
+                                    },
+                                    {
+                                        "title": "Branches",
+                                        "value": "`" + pullRequest.resource.sourceRefName + "` into `" + pullRequest.resource.targetRefName + "`",
+                                        "short": false
+                                    }
+                                ],
+                                "footer": "Visual Studio Team Services API",
+                                "footer_icon": process.env.SLACK_REDIRECT + "public/img/vsts.png"
+                            }
+                        ];
                         var bot = slack.getExistingBot(team.bot.token);
                         
                         bot.say({
-                            text: message,
+                            attachments: attachment,
                             channel: team.subscriptions[i].channel
                         });
                     }

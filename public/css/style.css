@@ -1425,3 +1425,13 @@
 		width: 100%;
 		position: relative;
 	}
+
+	.alert {
+		margin-bottom: 0;
+	}
+
+	.lj-quotes .alert i {
+		color: #3c763d;
+		top: 0;
+		font-size: 14px;
+	}

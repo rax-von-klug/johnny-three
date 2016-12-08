@@ -102,59 +102,6 @@ controller.on('create_bot',function(bot,team) {
                 }],
                 channel: team.createdBy
             });
-
-            // bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         convo.ask({
-            //             text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
-            //             attachments: [{
-            //                 title: 'To being your journey please make a selection below:',
-            //                 callback_id: '123',
-            //                 attachment_type: 'default',
-            //                 actions: [
-            //                     {
-            //                         "name":"vsts",
-            //                         "text": "Learn about VSTS Integrations",
-            //                         "value": "vsts",
-            //                         "type": "button"
-            //                     },
-            //                     {
-            //                         "name":"echo",
-            //                         "text": "Learn about cross team collaberation",
-            //                         "value": "echo",
-            //                         "type": "button"
-            //                     }
-            //                 ]
-            //             }]
-            //         }, [
-            //                 {
-            //                     pattern: "vsts",
-            //                     callback: function(reply, convo) {
-            //                         convo.say('VSTS!');
-            //                         convo.next();
-            //                         // do something awesome here.
-            //                     }
-            //                 },
-            //                 {
-            //                     pattern: "echo",
-            //                     callback: function(reply, convo) {
-            //                         convo.say('ECHO');
-            //                         convo.next();
-            //                     }
-            //                 },
-            //                 {
-            //                     default: true,
-            //                     callback: function(reply, convo) {
-            //                         // do nothing
-            //                     }
-            //                 }
-            //         ]);
-            //     }
-
-            // });
-
         });
     }
 });
@@ -169,6 +116,11 @@ controller.on('rtm_open',function(bot) {
 controller.on('rtm_close',function(bot) {
     console.log('** The RTM api just closed');
 // you may want to attempt to re-open
+});
+
+controller.hears('share', 'direct_mention', function(bot, message) {
+    console.log(message);
+    //controller.storage.teams.get()
 });
 
 controller.on('interactive_message_callback', function(bot, message) {

@@ -37,7 +37,7 @@ module.exports = function(app) {
                         var attachment = [
                             {
                                 "mrkdwn_in": ["text", "pretext", "fields"],
-                                "fallback": "Required plain-text summary of the attachment.",
+                                "fallback": "Pull Request #" + pullRequest.resource.pullRequestId + " created by " + pullRequest.resource.createdBy.displayName,
                                 "color": "#36a64f",
                                 "pretext": "<" + pull_request_url + "|Pull Request #" + pullRequest.resource.pullRequestId + "> created by " + pullRequest.resource.createdBy.displayName,
                                 "author_name": pullRequest.resource.repository.name,

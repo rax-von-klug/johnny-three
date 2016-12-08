@@ -171,6 +171,10 @@ controller.on('rtm_close',function(bot) {
 // you may want to attempt to re-open
 });
 
+controller.on('interactive_message_callback', function(bot, message) {
+    console.log(message);
+});
+
 //DIALOG ======================================================================
 
 controller.storage.teams.all(function(err,teams) {

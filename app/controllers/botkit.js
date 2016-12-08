@@ -71,7 +71,15 @@ controller.on('create_bot',function(bot,team) {
                             }
                         });
                     }
-                });               
+                });
+
+                if (team.incoming_webhook) {
+                    controller.sendWebhook({
+                        "username": "ghost-bot",
+                        "icon_emoji": ":ghost:",
+                        "text": "BOO!"
+                    });
+                }              
             }
             else{
                 console.log("RTM failed");

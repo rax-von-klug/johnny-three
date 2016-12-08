@@ -1,11 +1,10 @@
 var Request = require('request');
 var _ = require('lodash');
 var vsts = require('../factories/vsts');
+var slack = require('../controllers/botkit');
 
 // frontend routes =========================================================
 module.exports = function(app) {
-  var slack = require('../controllers/botkit')(app);
-
   //public pages=============================================
   //index
   app.get('/', function(req, res) {

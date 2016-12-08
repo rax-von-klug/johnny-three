@@ -1,4 +1,5 @@
 var request = require('request');
+var authHeader = 'Basic ' + process.env.AUTH;
 
 function getFlattenedPaths(areaPaths, currentObject, currentPath, currentFormattedPath) {
     var formattedPath = (currentFormattedPath ? currentFormattedPath + '\\' : '\\') + currentObject.name;
@@ -21,7 +22,7 @@ exports.getAreaPaths = function(callback) {
     request({
         url: 'https://chrislund.visualstudio.com/DefaultCollection/FailureIsNotAnOption/_apis/wit/classificationnodes/areas?$depth=80&api-version=1.0',
         headers: {
-            'Authorization': 'Basic Omh4cjUzNGR0eHliNnk1bWVwc2tkdW9lZGF2YmkzNnloZ3B0Y3VuNWRsZGl2a21waW15MnE=',
+            'Authorization': authHeader,
             'Content-Type': 'application/json'
         }
     }, function (error, response, body) {
@@ -39,7 +40,7 @@ exports.getTeams = function(callback) {
     request({
         url: 'https://chrislund.visualstudio.com/defaultcollection/_apis/projects/FailureIsNotAnOption/teams?api-version=1.0',
         headers: {
-            'Authorization': 'Basic Omh4cjUzNGR0eHliNnk1bWVwc2tkdW9lZGF2YmkzNnloZ3B0Y3VuNWRsZGl2a21waW15MnE=',
+            'Authorization': authHeader,
             'Content-Type': 'application/json'
         }
     }, function (error, response, body) {
@@ -59,7 +60,7 @@ exports.getProjects = function(callback) {
     request({
         url: 'https://chrislund.visualstudio.com/defaultcollection/_apis/projects?api-version=1.0',
         headers: {
-            'Authorization': 'Basic Omh4cjUzNGR0eHliNnk1bWVwc2tkdW9lZGF2YmkzNnloZ3B0Y3VuNWRsZGl2a21waW15MnE=',
+            'Authorization': authHeader,
             'Content-Type': 'application/json'
         }
     }, function (error, response, body) {
@@ -78,7 +79,7 @@ exports.getRepos = function(callback) {
     request({
         url: 'https://chrislund.visualstudio.com/DefaultCollection/FailureIsNotAnOption/_apis/git/repositories?api-version=1.0',
         headers: {
-            'Authorization': 'Basic Omh4cjUzNGR0eHliNnk1bWVwc2tkdW9lZGF2YmkzNnloZ3B0Y3VuNWRsZGl2a21waW15MnE=',
+            'Authorization': authHeader,
             'Content-Type': 'application/json'
         }
     }, function (error, response, body) {
@@ -105,7 +106,7 @@ exports.create_subscription = function(options, callback, event) {
     request({
         url: 'https://chrislund.visualstudio.com/defaultcollection/_apis/hooks/subscriptions?api-version=1.0',
         headers: {
-            'Authorization': 'Basic Omh4cjUzNGR0eHliNnk1bWVwc2tkdW9lZGF2YmkzNnloZ3B0Y3VuNWRsZGl2a21waW15MnE=',
+            'Authorization': authHeader,
             'Content-Type': 'application/json'
         },
         method: 'POST',

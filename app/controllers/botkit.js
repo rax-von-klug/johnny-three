@@ -79,57 +79,81 @@ controller.on('create_bot',function(bot,team) {
                 console.log("RTM failed");
             }
 
-            bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    convo.ask({
-                        text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
-                        attachments: [{
-                            title: 'To being your journey please make a selection below:',
-                            callback_id: '123',
-                            attachment_type: 'default',
-                            actions: [
-                                {
-                                    "name":"vsts",
-                                    "text": "Learn about VSTS Integrations",
-                                    "value": "vsts",
-                                    "type": "button"
-                                },
-                                {
-                                    "name":"echo",
-                                    "text": "Learn about cross team collaberation",
-                                    "value": "echo",
-                                    "type": "button"
-                                }
-                            ]
-                        }]
-                    }, [
-                            {
-                                pattern: "vsts",
-                                callback: function(reply, convo) {
-                                    convo.say('VSTS!');
-                                    convo.next();
-                                    // do something awesome here.
-                                }
-                            },
-                            {
-                                pattern: "echo",
-                                callback: function(reply, convo) {
-                                    convo.say('ECHO');
-                                    convo.next();
-                                }
-                            },
-                            {
-                                default: true,
-                                callback: function(reply, convo) {
-                                    // do nothing
-                                }
-                            }
-                    ]);
-                }
-
+            bot.say({
+                text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
+                attachments: [{
+                    title: 'To being your journey please make a selection below:',
+                    callback_id: '123',
+                    attachment_type: 'default',
+                    actions: [
+                        {
+                            "name":"vsts",
+                            "text": "Learn about VSTS Integrations",
+                            "value": "vsts",
+                            "type": "button"
+                        },
+                        {
+                            "name":"echo",
+                            "text": "Learn about cross team collaberation",
+                            "value": "echo",
+                            "type": "button"
+                        }
+                    ]
+                }],
+                channel: team.createdBy
             });
+
+            // bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
+            //     if (err) {
+            //         console.log(err);
+            //     } else {
+            //         convo.ask({
+            //             text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
+            //             attachments: [{
+            //                 title: 'To being your journey please make a selection below:',
+            //                 callback_id: '123',
+            //                 attachment_type: 'default',
+            //                 actions: [
+            //                     {
+            //                         "name":"vsts",
+            //                         "text": "Learn about VSTS Integrations",
+            //                         "value": "vsts",
+            //                         "type": "button"
+            //                     },
+            //                     {
+            //                         "name":"echo",
+            //                         "text": "Learn about cross team collaberation",
+            //                         "value": "echo",
+            //                         "type": "button"
+            //                     }
+            //                 ]
+            //             }]
+            //         }, [
+            //                 {
+            //                     pattern: "vsts",
+            //                     callback: function(reply, convo) {
+            //                         convo.say('VSTS!');
+            //                         convo.next();
+            //                         // do something awesome here.
+            //                     }
+            //                 },
+            //                 {
+            //                     pattern: "echo",
+            //                     callback: function(reply, convo) {
+            //                         convo.say('ECHO');
+            //                         convo.next();
+            //                     }
+            //                 },
+            //                 {
+            //                     default: true,
+            //                     callback: function(reply, convo) {
+            //                         // do nothing
+            //                     }
+            //                 }
+            //         ]);
+            //     }
+
+            // });
 
         });
     }

@@ -74,7 +74,7 @@ controller.on('create_bot',function(bot,team) {
                 });
 
                 if (team.incoming_webhook) {
-                    controller.sendWebhook({
+                    bot.sendWebhook({
                         "username": "ghost-bot",
                         "icon_emoji": ":ghost:",
                         "text": "BOO!"

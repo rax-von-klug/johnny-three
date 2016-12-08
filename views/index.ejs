@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        <title>Johnny Three - Interactive Connections Slack Bot</title>
+        <title>Jonne-3 - Human - VSTS relations</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.png">
@@ -19,59 +19,51 @@
     </head>
     <body>
         <!-- MENU -->
-        <div class="lj-menu">
-            <div class="row">
-                <div class="col-sm-12">
-                    <!-- LOGO -->
-                    <div class="lj-logo">
-                        <a href="#header" class="slide" title="">
-                            <img src="img/logo.png" data-retina-src="img/logo@2x.png" alt="">
-                        </a>
-                        <a href="#header" class="slide floating" title="">
-                            <img src="img/logo-floating.png" data-retina-src="img/logo-floating@2x.png" alt="">
-                        </a>
-                    </div>
-                    <!-- /LOGO -->
+        <nav class="navbar navbar-fixed-top navbar-default fixednav" role="navigation">
+            <div class="navbar-header">
+                <!-- begin logo in navigation -->
+                <a class="go" href="/"><img src="/img/jonne-3-logo_blue.png" alt=""></a>
+                <!-- end logo in navigation -->
+            </div>
 
-                    <!-- MOBILE MENU BUTTON -->
-                    <a href="#!" class="menu-icon">
-                        <span class="menu-icon__text">Show Menu</span>
-                    </a>
-                    <!-- /MOBILE MENU BUTTON -->
-
-                    <!-- MENU LIST -->
-                    <div class="lj-menu-list">
-                        <ul>
-                            <li><a href="#header" class="slide">Home</a></li>
-                            <li><a href="#features" class="slide">Features</a></li>
-                            <li><a href="#app" class="slide">Install</a></li>
-                        </ul>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- begin navigation items -->
+                    <li><a href="#header" class="slide">Home</a></li>
+                    <li><a href="#features" class="slide">Features</a></li>
+                    <li><a href="#app" class="slide">Install</a></li>
+                    <!-- end navigation items -->
+                </ul>
+            </div>
+        </nav>        
+        <!-- /MENU -->
+        <!-- HEADER -->
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 col-md-offset-9 text-center">
+                        <button class="button button-login" type="button">Login</button>
                     </div>
-                    <!-- /MENU LIST -->
+                </div>            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="logo">
+                            <a href="/">
+                                <img src="/img/jonne-3-title-image.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h1>
+                            <strong>Jonne-3</strong> Human / VSTS relations bot. He increases team collaberation and productivity.
+                        </h1>
+                        <div class="browser">
+                            <img class="header" src="/img/header.png" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /MENU -->
-        <!-- HEADER -->
-        <header id="header">
-            <!-- HEADER OVERLAY --> 
-            <div class="lj-overlay lj-overlay-color"></div>
-            <!-- /HEADER OVERLAY -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-7">
-                        <h1>Johnny-Three</h1>
-                        <p>A slack bot to improve team productivity.</p>
-                    </div>
-                    <!-- HEADER IMAGE -->
-                    <div class="col-sm-5 hidden-xs">
-                        <img src="img/header.png" alt="">
-                    </div>
-                    <!-- /HEADER IMAGE -->
-                </div>
-            </div>
-        </header>
-        <!-- /HEADER -->
         <!-- FEATURES #1 -->
         <div id="features" class="lj-features">
             <div class="container">
@@ -112,7 +104,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2>Start by integrating Johnny-Three with your Slack Team</h2>
+                        <h2>Start by integrating Jonne-3 with your Slack Team</h2>
                         <ul>
                             <li><a href='https://slack.com/oauth/authorize?client_id=<%= process.env.SLACK_ID %>&redirect_uri=<%= process.env.SLACK_REDIRECT %>new&scope=bot'><img alt="Add to Slack" height="40" width="139" src="/img/add_to_slack.png"></a></li>
                         </ul>
@@ -126,7 +118,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <p>&copy; All rights reserved.</p>
+                        <p>&nbsp;</p>
                     </div>
                 </div>
             </div>

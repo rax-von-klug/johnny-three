@@ -12,7 +12,12 @@ if (!process.env.SLACK_ID || !process.env.SLACK_SECRET || !process.env.PORT) {
 }
 
 var controller = Botkit.slackbot({
-    storage: botkit_mongo_storage
+    storage: botkit_mongo_storage,
+    interactive_replies: true
+});
+
+controller.setupWebserver(process.env.port, function(err,webserver) {
+  controller.createWebhookEndpoints(controller.webserver);
 });
 
 exports.controller = controller
@@ -72,29 +77,7 @@ controller.on('create_bot',function(bot,team) {
                             }
                         });
                     }
-                });
-
-                if (team.incoming_webhook) {
-                    var options = {
-                        headers: {
-                            'Content-type': 'application/json'
-                        },
-                        url: team.incoming_webhook.url,
-                        method: 'POST',
-                        body: '{"username": "ghost-bot", "text": "BOO!", "icon_emoji": ":ghost:"}'
-                    };
-
-                    function callback(error, response, body) {
-                        console.log('FIND ME!!!!!');
-                        console.log(response.statusCode);
-                        console.log(body);
-                        if (!error && response.statusCode == 200) {
-                            console.log(body);
-                        }
-                    }
-
-                    request(options, callback);
-                }              
+                });            
             }
             else{
                 console.log("RTM failed");
@@ -107,6 +90,7 @@ controller.on('create_bot',function(bot,team) {
                 } else {
                     convo.say('Hi! I\'m Johnny-Three, Human / VSTS relations');
                     convo.say('To start receiving your VSTS notifications please visit http://johnny-three.herokuapp.com/admin/' + team.id);
+                    convo.say('To being sharing your messages with other teams please ')
                 }
             });
 
@@ -127,26 +111,6 @@ controller.on('rtm_close',function(bot) {
 });
 
 //DIALOG ======================================================================
-
-controller.hears('hello','direct_message',function(bot,message) {
-    bot.reply(message,'Hello!');
-});
-
-controller.hears('^stop','direct_message',function(bot,message) {
-    bot.reply(message,'Goodbye');
-    bot.rtm.close();
-});
-
-controller.on('direct_message,mention,direct_mention',function(bot,message) {
-    bot.api.reactions.add({
-        timestamp: message.ts,
-        channel: message.channel,
-        name: 'robot_face',
-    }, function(err) {
-        if (err) { console.log(err) }
-        bot.reply(message,'I heard you loud and clear boss.');
-    });
-});
 
 controller.storage.teams.all(function(err,teams) {
 

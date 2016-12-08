@@ -85,6 +85,7 @@ controller.on('create_bot',function(bot,team) {
                     };
 
                     function callback(error, response, body) {
+                        console.log('FIND ME!!!!!');
                         console.log(response.statusCode);
                         console.log(body);
                         if (!error && response.statusCode == 200) {

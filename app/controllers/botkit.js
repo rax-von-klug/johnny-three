@@ -84,9 +84,50 @@ controller.on('create_bot',function(bot,team) {
                 if (err) {
                     console.log(err);
                 } else {
-                    convo.say('Hi! I\'m Johnny-Three, Human / VSTS relations');
-                    convo.say('To start receiving your VSTS notifications please visit http://johnny-three.herokuapp.com/admin/' + team.id);
-                    convo.say('To being sharing your messages with other teams please ')
+                    convo.ask({
+                        text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
+                        attachments: [{
+                            title: 'To being your journey please make a selection below:',
+                            callback_id: '123',
+                            attachment_type: 'default',
+                            actions: [
+                                {
+                                    "name":"vsts",
+                                    "text": "Learn about VSTS Integrations",
+                                    "value": "vsts",
+                                    "type": "button",
+                                },
+                                {
+                                    "name":"echo",
+                                    "text": "Learn about cross team collaberation",
+                                    "value": "echo",
+                                    "type": "button",
+                                }
+                            ]
+                        }]
+                    },[
+                        {
+                            pattern: "vsts",
+                            callback: function(reply, convo) {
+                                convo.say('VSTS!');
+                                convo.next();
+                                // do something awesome here.
+                            }
+                        },
+                        {
+                            pattern: "echo",
+                            callback: function(reply, convo) {
+                                convo.say('ECHO');
+                                convo.next();
+                            }
+                        },
+                        {
+                            default: true,
+                            callback: function(reply, convo) {
+                                // do nothing
+                            }
+                        }
+                    ]);
                 }
             });
 

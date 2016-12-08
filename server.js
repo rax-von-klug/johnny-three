@@ -4,7 +4,7 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
 var dotenv         = require('dotenv');
-
+var slack          = require('./app/controllers/botkit');
 // configuration ===========================================
 
 //load environment variables,
@@ -29,8 +29,7 @@ require('./app/routes/event_handlers')(app);
 //port for Heroku
 app.set('port', (process.env.PORT));
 
-//botkit (apres port)
-require('./app/controllers/botkit');
+slack.controller.createWebhookEndpoints(app);
 
 //START ===================================================
 http.listen(app.get('port'), function(){

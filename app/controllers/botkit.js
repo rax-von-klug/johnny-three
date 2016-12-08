@@ -60,7 +60,8 @@ controller.on('create_bot',function(bot,team) {
                             for (var i = 0; i < result.channels.length; i++) {
                                 team.channels.push({
                                     id: result.channels[i].id,
-                                    name: result.channels[i].name
+                                    name: result.channels[i].name,
+                                    shared: false
                                 })
                             }
                         }
@@ -119,8 +120,23 @@ controller.on('rtm_close',function(bot) {
 });
 
 controller.hears('share', 'direct_mention', function(bot, message) {
-    console.log(message);
-    //controller.storage.teams.get()
+    //console.log(message);
+
+    controller.storage.teams.get(message.team, function(err, team_data) {
+        if (!err) {
+            for(var i = 0; i < team_data.channels.length; i++) {
+                if (team_data.channels[i].id === message.channel) {
+                    team_data.channels[i].shared = true;
+
+                    controller.saveTeam(team_data, function(err, id) {
+                        bot.reply(message, {
+                            text: 'Your channel has been marked as shared.'
+                        });
+                    });
+                }
+            }
+        }
+    });
 });
 
 controller.on('interactive_message_callback', function(bot, message) {

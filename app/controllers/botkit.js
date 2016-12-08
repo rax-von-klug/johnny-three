@@ -2,6 +2,7 @@
 
 /* Uses the slack button feature to offer a real time bot to multiple teams */
 var Botkit = require('botkit');
+var request = require('request');
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/botkit_express_demo'
 var botkit_mongo_storage = require('../../config/botkit-storage-mongoose')({mongoUri: mongoUri})
 
@@ -74,11 +75,21 @@ controller.on('create_bot',function(bot,team) {
                 });
 
                 if (team.incoming_webhook) {
-                    bot.sendWebhook({
-                        "username": "ghost-bot",
-                        "icon_emoji": ":ghost:",
-                        "text": "BOO!"
-                    });
+                    var options = {
+                        url: team.incoming_webhook.url,
+                        method: 'POST',
+                        body: '{"username": "ghost-bot", "text": "BOO!", "icon_emoji": ":ghost:"}'
+                    };
+
+                    function callback(error, response, body) {
+                        console.log(response.statusCode);
+                        console.log(body);
+                        if (!error && response.statusCode == 200) {
+                            console.log(body);
+                        }
+                    }
+
+                    request(options, callback);
                 }              
             }
             else{

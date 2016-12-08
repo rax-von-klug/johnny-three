@@ -80,7 +80,6 @@ controller.on('create_bot',function(bot,team) {
             }
 
             bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
-                //console.log(JSON.stringify(convo));
                 if (err) {
                     console.log(err);
                 } else {
@@ -95,38 +94,38 @@ controller.on('create_bot',function(bot,team) {
                                     "name":"vsts",
                                     "text": "Learn about VSTS Integrations",
                                     "value": "vsts",
-                                    "type": "button",
+                                    "type": "button"
                                 },
                                 {
                                     "name":"echo",
                                     "text": "Learn about cross team collaberation",
                                     "value": "echo",
-                                    "type": "button",
+                                    "type": "button"
                                 }
                             ]
                         }]
-                    },[
-                        {
-                            pattern: "vsts",
-                            callback: function(reply, convo) {
-                                convo.say('VSTS!');
-                                convo.next();
-                                // do something awesome here.
+                    }, [
+                            {
+                                pattern: "vsts",
+                                callback: function(reply, convo) {
+                                    convo.say('VSTS!');
+                                    convo.next();
+                                    // do something awesome here.
+                                }
+                            },
+                            {
+                                pattern: "echo",
+                                callback: function(reply, convo) {
+                                    convo.say('ECHO');
+                                    convo.next();
+                                }
+                            },
+                            {
+                                default: true,
+                                callback: function(reply, convo) {
+                                    // do nothing
+                                }
                             }
-                        },
-                        {
-                            pattern: "echo",
-                            callback: function(reply, convo) {
-                                convo.say('ECHO');
-                                convo.next();
-                            }
-                        },
-                        {
-                            default: true,
-                            callback: function(reply, convo) {
-                                // do nothing
-                            }
-                        }
                     ]);
                 }
 

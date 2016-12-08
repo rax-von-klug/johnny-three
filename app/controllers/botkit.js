@@ -83,7 +83,7 @@ controller.on('create_bot',function(bot,team) {
                     console.log(err);
                 } else {
                     convo.say('Hi! I\'m Johnny-Three, Human / VSTS relations');
-                    convo.say('To start receiving your VSTS notifications please visit http://johnny-three.herokuapp.com/admin/' + team.id);
+                    convo.say('To start receiving your VSTS notifications please visit ' + process.env.ADMIN_URL + team.id);
                 }
             });
 

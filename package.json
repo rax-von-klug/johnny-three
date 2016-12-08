@@ -2,9 +2,9 @@
   "name": "johnny-three",
   "version": "0.0.0",
   "description": "Slack Bot",
-  "main": "app/server.js",
+  "main": "./server.js",
   "scripts": {
-    "start": "node app/server.js",
+    "start": "node ./server.js",
     "test": "istanbul cover --report lcov --dir coverage/ _mocha ./tests --grep ./tests/*.js -- --colors"
   },
   "repository": {

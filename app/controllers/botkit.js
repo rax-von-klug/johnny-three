@@ -76,6 +76,9 @@ controller.on('create_bot',function(bot,team) {
 
                 if (team.incoming_webhook) {
                     var options = {
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
                         url: team.incoming_webhook.url,
                         method: 'POST',
                         body: '{"username": "ghost-bot", "text": "BOO!", "icon_emoji": ":ghost:"}'

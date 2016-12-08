@@ -129,6 +129,7 @@ controller.on('create_bot',function(bot,team) {
                         }
                     ]);
                 }
+
             });
 
         });

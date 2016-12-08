@@ -153,7 +153,8 @@ module.exports = function(app) {
             },
             createdBy: identity.user_id,
             url: identity.url,
-            name: identity.team
+            name: identity.team,
+            incoming_webhook: identity.incoming_webhook
           };
           
           startBot(team);

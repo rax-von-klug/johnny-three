@@ -2,6 +2,7 @@
 
 /* Uses the slack button feature to offer a real time bot to multiple teams */
 var Botkit = require('botkit');
+var request = require('request');
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/botkit_express_demo'
 var botkit_mongo_storage = require('../../config/botkit-storage-mongoose')({mongoUri: mongoUri})
 
@@ -11,7 +12,12 @@ if (!process.env.SLACK_ID || !process.env.SLACK_SECRET || !process.env.PORT) {
 }
 
 var controller = Botkit.slackbot({
-    storage: botkit_mongo_storage
+    storage: botkit_mongo_storage,
+    interactive_replies: true
+});
+
+controller.setupWebserver(process.env.PORT, function(err,webserver) {
+  controller.createWebhookEndpoints(controller.webserver);
 });
 
 exports.controller = controller
@@ -71,7 +77,7 @@ controller.on('create_bot',function(bot,team) {
                             }
                         });
                     }
-                });               
+                });            
             }
             else{
                 console.log("RTM failed");
@@ -83,7 +89,8 @@ controller.on('create_bot',function(bot,team) {
                     console.log(err);
                 } else {
                     convo.say('Hi! I\'m Johnny-Three, Human / VSTS relations');
-                    convo.say('To start receiving your VSTS notifications please visit ' + process.env.ADMIN_URL + team.id);
+                    convo.say('To start receiving your VSTS notifications please visit http://johnny-three.herokuapp.com/admin/' + team.id);
+                    convo.say('To being sharing your messages with other teams please ');
                 }
             });
 
@@ -104,26 +111,6 @@ controller.on('rtm_close',function(bot) {
 });
 
 //DIALOG ======================================================================
-
-controller.hears('hello','direct_message',function(bot,message) {
-    bot.reply(message,'Hello!');
-});
-
-controller.hears('^stop','direct_message',function(bot,message) {
-    bot.reply(message,'Goodbye');
-    bot.rtm.close();
-});
-
-controller.on('direct_message,mention,direct_mention',function(bot,message) {
-    bot.api.reactions.add({
-        timestamp: message.ts,
-        channel: message.channel,
-        name: 'robot_face',
-    }, function(err) {
-        if (err) { console.log(err) }
-        bot.reply(message,'I heard you loud and clear boss.');
-    });
-});
 
 controller.storage.teams.all(function(err,teams) {
 

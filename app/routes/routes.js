@@ -41,6 +41,10 @@ module.exports = function(app) {
     }
   });
 
+  app.post('/message_action', function(req, res) {
+    
+  });
+
   app.post('/subscribe', function(req, res) {
     var channel = req.body.channel;
     var area_path = req.body.area_path;
@@ -153,7 +157,8 @@ module.exports = function(app) {
             },
             createdBy: identity.user_id,
             url: identity.url,
-            name: identity.team
+            name: identity.team,
+            incoming_webhook: auth.incoming_webhook
           };
           
           startBot(team);

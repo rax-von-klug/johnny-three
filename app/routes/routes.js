@@ -154,7 +154,7 @@ module.exports = function(app) {
             createdBy: identity.user_id,
             url: identity.url,
             name: identity.team,
-            incoming_webhook: identity.incoming_webhook
+            incoming_webhook: auth.incoming_webhook
           };
           
           startBot(team);

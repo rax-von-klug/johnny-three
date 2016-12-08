@@ -1,10 +1,10 @@
 var Request = require('request');
 var _ = require('lodash');
-var slack = require('../controllers/botkit')
 var vsts = require('../factories/vsts');
 
 // frontend routes =========================================================
 module.exports = function(app) {
+  var slack = require('../controllers/botkit')(app);
 
   //public pages=============================================
   //index
@@ -39,10 +39,6 @@ module.exports = function(app) {
       console.log("New user auth code " + auth_code);
       perform_auth(auth_code, res);
     }
-  });
-
-  app.post('/message_action', function(req, res) {
-    
   });
 
   app.post('/subscribe', function(req, res) {

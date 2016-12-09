@@ -58,11 +58,17 @@ module.exports = function(app) {
                   });
 
                   slack.controller.storage.shares.save(shared);
+
+                  res.send({
+                      text: 'You have joined the conversation!',
+                      response_type: 'in_channel',
+                      replace_original: false
+                  });
               });
           });
       }
 
-      res.end();
+      
   });
 
   app.post('/subscribe', function(req, res) {

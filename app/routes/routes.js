@@ -41,13 +41,25 @@ module.exports = function(app) {
   });
 
   app.post('/interactive', function(req, res) {
-      //console.log(JSON.parse(req.body.payload));
-      
       var payload = JSON.parse(req.body.payload);
 
       if (payload.callback_id.includes("join_shared_channel_")) {
-          console.log("YAY!!!");
+          slack.controller.storage.shares.get(payload.actions[0].value, function(err, shared) {
+              slack.controller.storage.team.get(payload.team.id, function(err, team_data) {
+                  if (!_.isArray(shared.join_channels)) {
+                    shared.join_channels = [];
+                  }
+
+                  shared.join_channels.push({
+                      id: team_data.id,
+                      webhookUrl: team_data.webhooks.incomingUrl,
+                      postChannel: payload.channel.id
+                  });
+              });
+          });
       }
+
+      res.end();
   });
 
   app.post('/subscribe', function(req, res) {

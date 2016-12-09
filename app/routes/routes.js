@@ -47,7 +47,7 @@ module.exports = function(app) {
           slack.controller.storage.shares.get(payload.actions[0].value, function(err, shared) {
               slack.controller.storage.teams.get(payload.team.id, function(err, team_data) {
                   console.log(shared);
-                  if (!_.isArray(shared.joinedChannels) || shared.joinedChannels.length === 0) {
+                  if (!_.isArray(shared.joinedChannels)) {
                     shared.joinedChannels = [];
                   }
 
@@ -56,6 +56,8 @@ module.exports = function(app) {
                       webhookUrl: team_data.webhooks.incomingUrl,
                       postChannel: payload.channel.id
                   });
+
+                  slack.controller.storage.shares.save(shared);
               });
           });
       }

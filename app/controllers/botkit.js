@@ -108,6 +108,32 @@ controller.on('create_bot',function(bot,team) {
 });
 
 //REACTIONS TO EVENTS==========================================================
+controller.hears([".+","^pattern$"],["ambient"],function(bot,message) {
+    var shareId = bot.team_info.id + '.' + message.channel;
+                    
+    bot.api.users.info({
+        user: message.user,
+        token: bot.config.token
+    }, function(err, result) {
+        var usernameForMessage =  result.user.name + ' (from ' + bot.team_info.name + ')';
+
+        controller.storage.shares.get(shareId, function(err, share) {
+            if(!err) {
+                for (var i=0; i < share.joinedChannels.length; i++) {
+                    request({
+                        url: share.joinedChannels[i].webhookUrl,
+                        method: 'POST',
+                        json: {
+                            username: usernameForMessage,
+                            text: message.text,
+                            channel: share.joinedChannels[i].postChannelId
+                        }
+                    });
+                }
+            }
+        }); 
+    });
+});
 
 controller.hears('register', 'direct_mention', function(bot, message) {
     var webhookUrl = message.text.substring(8).replace(/\s/g, '');
@@ -163,6 +189,7 @@ controller.hears('share', 'direct_mention', function(bot, message) {
                     team_data.channels[i].shared = true;
 
                     controller.storage.shares.save({
+                        id: team_data.id + '.' + message.channel,
                         teamId: team_data.id,
                         teamName: team_data.name,
                         channelId: message.channel,

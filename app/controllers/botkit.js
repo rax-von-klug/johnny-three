@@ -152,14 +152,13 @@ controller.hears('available', 'direct_mention', function(bot, message) {
 
             for(var i = 0; i < team.channels.length; i++) {
                 if (team.channels[i].shared === true) {
-                    console.log(available_channels);
                     available_channels.push({
                         id: team.channels[i].id,
                         name: team.channels[i].name,
                         team_id: team.id,
                         team_name: team.name
                     });
-                    console.log(available_channels);
+                    
                 }
             }
         }
@@ -169,6 +168,7 @@ controller.hears('available', 'direct_mention', function(bot, message) {
 
     for(var x = 0; x < available_channels.length; x++) {
         var channel = available_channels[x];
+        console.log(channel);
         bot.reply(message, {
             text: "*" + channel.channel_name + "* in *" + channel.team_name + "* has been shared.",
             attachments: [

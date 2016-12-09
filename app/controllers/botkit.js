@@ -162,9 +162,17 @@ controller.hears('share', 'direct_mention', function(bot, message) {
                 if (team_data.channels[i].id === message.channel) {
                     team_data.channels[i].shared = true;
 
-                    controller.saveTeam(team_data, function(err, id) {
-                        bot.reply(message, {
-                            text: 'Your channel has been marked as shared.'
+                    controller.storage.shares.save({
+                        teamId: team_data.id,
+                        teamName: team_data.name,
+                        channelId: message.channel,
+                        channelName: team_data.channels[i].name,
+                        joinedChannels: []
+                    }, function() {
+                        controller.saveTeam(team_data, function(err, id) {
+                            bot.reply(message, {
+                                text: 'Your channel has been marked as shared.'
+                            });
                         });
                     });
                 }

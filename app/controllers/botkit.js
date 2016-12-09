@@ -138,7 +138,7 @@ controller.hears([".+","^pattern$"],["ambient"],function(bot,message) {
 controller.hears('register', 'direct_mention', function(bot, message) {
     var webhookUrl = message.text.substring(8).replace(/\s/g, '');
     var urlStartIndex = webhookUrl.indexOf('<');
-    var urlEndIndex = webhookUrl.indexOf('|');
+    var urlEndIndex = webhookUrl.indexOf('>');
 
     if(urlStartIndex !== -1 && urlEndIndex !== -1) {
         webhookUrl = webhookUrl.substring(urlStartIndex + 1, urlEndIndex);

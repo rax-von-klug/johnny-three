@@ -1,16 +1,16 @@
+//load environment variables,
+//either from .env files (development),
+//heroku environment in production, etc...
+var dotenv         = require('dotenv');
+dotenv.load();
+
 // modules =================================================
 var express        = require('express');
 var app            = express();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
-var dotenv         = require('dotenv');
 var slack          = require('./app/controllers/botkit');
 // configuration ===========================================
-
-//load environment variables,
-//either from .env files (development),
-//heroku environment in production, etc...
-dotenv.load();
 
 // public folder for images, css,...
 app.use(express.static(__dirname + '/public'))

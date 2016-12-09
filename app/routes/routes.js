@@ -41,8 +41,9 @@ module.exports = function(app) {
   });
 
   app.post('/interactive', function(req, res) {
+      console.log(req.body);
       console.log(JSON.parse(req.body.payload));
-      
+
       if ("join_shared_channel_".match(payload.callback_id)) {
         console.log("YAY!!!");
       }

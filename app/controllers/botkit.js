@@ -119,16 +119,18 @@ controller.hears([".+","^pattern$"],["ambient"],function(bot,message) {
 
         controller.storage.shares.get(shareId, function(err, share) {
             if(!err) {
-                for (var i=0; i < share.joinedChannels.length; i++) {
-                    request({
-                        url: share.joinedChannels[i].webhookUrl,
-                        method: 'POST',
-                        json: {
-                            username: usernameForMessage,
-                            text: message.text,
-                            channel: share.joinedChannels[i].postChannelId
-                        }
-                    });
+                if (share != null) {
+                    for (var i=0; i < share.joinedChannels.length; i++) {
+                        request({
+                            url: share.joinedChannels[i].webhookUrl,
+                            method: 'POST',
+                            json: {
+                                username: usernameForMessage,
+                                text: message.text,
+                                channel: share.joinedChannels[i].postChannelId
+                            }
+                        });
+                    }
                 }
             }
         }); 

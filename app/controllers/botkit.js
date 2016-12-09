@@ -156,7 +156,8 @@ controller.hears('available', 'direct_mention', function(bot, message) {
             for(var i = 0; i < team.channels.length; i++) {
                 console.log(team.channels[i].shared);
 
-                if (team.channels[i].shared === "true") {
+                if (team.channels[i].shared === true) {
+                    console.log(team.channels[i]);
                     available_channels.push({
                         id: team.channels[i].id,
                         name: team.channels[i].name,

@@ -41,7 +41,7 @@ module.exports = function(app) {
   });
 
   app.post('/interactive', function(req, res) {
-      console.log(JSON.parse(req.body.payload));
+      //console.log(JSON.parse(req.body.payload));
       
       var payload = JSON.parse(req.body.parse);
 

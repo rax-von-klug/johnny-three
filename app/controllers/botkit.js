@@ -206,7 +206,7 @@ controller.hears('share', 'direct_mention', function(bot, message) {
                     });
                 }
             }
-        }
+        } else { console.log(err); }
     });
 });
 

@@ -60,7 +60,8 @@ controller.on('create_bot',function(bot,team) {
                             for (var i = 0; i < result.channels.length; i++) {
                                 team.channels.push({
                                     id: result.channels[i].id,
-                                    name: result.channels[i].name
+                                    name: result.channels[i].name,
+                                    shared: false
                                 })
                             }
                         }
@@ -79,59 +80,29 @@ controller.on('create_bot',function(bot,team) {
                 console.log("RTM failed");
             }
 
-            bot.startPrivateConversation({user: team.createdBy}, function(err, convo) {
-                //console.log(JSON.stringify(convo));
-                if (err) {
-                    console.log(err);
-                } else {
-                    convo.ask({
-                        text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
-                        attachments: [{
-                            title: 'To being your journey please make a selection below:',
-                            callback_id: '123',
-                            attachment_type: 'default',
-                            actions: [
-                                {
-                                    "name":"vsts",
-                                    "text": "Learn about VSTS Integrations",
-                                    "value": "vsts",
-                                    "type": "button",
-                                },
-                                {
-                                    "name":"echo",
-                                    "text": "Learn about cross team collaberation",
-                                    "value": "echo",
-                                    "type": "button",
-                                }
-                            ]
-                        }]
-                    },[
+            bot.say({
+                text: 'Hi! I\'m Johnny-Three, Human / VSTS relations',
+                attachments: [{
+                    title: 'To being your journey please make a selection below:',
+                    callback_id: '123',
+                    attachment_type: 'default',
+                    actions: [
                         {
-                            pattern: "vsts",
-                            callback: function(reply, convo) {
-                                convo.say('VSTS!');
-                                convo.next();
-                                // do something awesome here.
-                            }
+                            "name":"vsts",
+                            "text": "Learn about VSTS Integrations",
+                            "value": "vsts",
+                            "type": "button"
                         },
                         {
-                            pattern: "echo",
-                            callback: function(reply, convo) {
-                                convo.say('ECHO');
-                                convo.next();
-                            }
-                        },
-                        {
-                            default: true,
-                            callback: function(reply, convo) {
-                                // do nothing
-                            }
+                            "name":"echo",
+                            "text": "Learn about cross team collaberation",
+                            "value": "echo",
+                            "type": "button"
                         }
-                    ]);
-                }
-
+                    ]
+                }],
+                channel: team.createdBy
             });
-
         });
     }
 });
@@ -180,6 +151,72 @@ controller.on('rtm_open',function(bot) {
 controller.on('rtm_close',function(bot) {
     console.log('** The RTM api just closed');
 // you may want to attempt to re-open
+});
+
+controller.hears('share', 'direct_mention', function(bot, message) {
+    //console.log(message);
+
+    controller.storage.teams.get(message.team, function(err, team_data) {
+        if (!err) {
+            for(var i = 0; i < team_data.channels.length; i++) {
+                if (team_data.channels[i].id === message.channel) {
+                    team_data.channels[i].shared = true;
+
+                    controller.saveTeam(team_data, function(err, id) {
+                        bot.reply(message, {
+                            text: 'Your channel has been marked as shared.'
+                        });
+                    });
+                }
+            }
+        }
+    });
+});
+
+controller.hears('available', 'direct_mention', function(bot, message) {
+    var available_channels = [];
+
+    controller.storage.teams.all(function(err, teams) {
+        if (err) {
+            console.log(err);
+        }
+
+        for (var t in teams) {
+            var team = teams[t];
+
+            for(var i = 0; i < team.channels.length; i++) {
+                if (team.channels[i].shared === true) {
+                    var channel = team.channels[i];
+
+                    bot.reply(message, {
+                        text: "*" + channel.name + "* in *" + team.name + "* has been shared.",
+                        attachments: [
+                            {
+                                text: "Would you like to join in the conversation?",
+                                fallback: "You are unable to choose a game",
+                                callback_id: "join_shared_channel_" + channel.id,
+                                color: "#3AA3E3",
+                                attachment_type: "default",
+                                actions: [
+                                    {
+                                        name: "join_channel",
+                                        text: "Join",
+                                        type: "button",
+                                        style: "primary",
+                                        value: channel.team_id + "." + channel.id
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+                }
+            }
+        }
+    });
+});
+
+controller.on('interactive_message_callback', function(bot, message) {
+    console.log(message);
 });
 
 //DIALOG ======================================================================

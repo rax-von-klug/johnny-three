@@ -238,7 +238,7 @@ controller.hears('available', 'direct_mention', function(bot, message) {
                                         text: "Join",
                                         type: "button",
                                         style: "primary",
-                                        value: channel.team_id + "." + channel.id
+                                        value: team.id + "." + channel.id
                                     }
                                 ]
                             }

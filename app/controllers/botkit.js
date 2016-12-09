@@ -159,6 +159,7 @@ controller.hears('available', 'direct_mention', function(bot, message) {
                         team_id: team.id,
                         team_name: team.name
                     });
+                    console.log(available_channels);
                 }
             }
         }

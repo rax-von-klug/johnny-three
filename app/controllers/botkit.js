@@ -152,44 +152,33 @@ controller.hears('available', 'direct_mention', function(bot, message) {
 
             for(var i = 0; i < team.channels.length; i++) {
                 if (team.channels[i].shared === true) {
-                    available_channels.push({
-                        id: team.channels[i].id,
-                        name: team.channels[i].name,
-                        team_id: team.id,
-                        team_name: team.name
+                    var channel = team.channels[i];
+
+                    bot.reply(message, {
+                        text: "*" + channel.name + "* in *" + team.name + "* has been shared.",
+                        attachments: [
+                            {
+                                text: "Would you like to join in the conversation?",
+                                fallback: "You are unable to choose a game",
+                                callback_id: "join_shared_channel_" + channel.id,
+                                color: "#3AA3E3",
+                                attachment_type: "default",
+                                actions: [
+                                    {
+                                        name: "join_channel",
+                                        text: "Join",
+                                        type: "button",
+                                        style: "primary",
+                                        value: channel.team_id + "." + channel.id
+                                    }
+                                ]
+                            }
+                        ]
                     });
-                    
                 }
             }
         }
     });
-
-    console.log(available_channels);
-
-    for(var x = 0; x < available_channels.length; x++) {
-        var channel = available_channels[x];
-        console.log(channel);
-        bot.reply(message, {
-            text: "*" + channel.channel_name + "* in *" + channel.team_name + "* has been shared.",
-            attachments: [
-                {
-                    text: "Would you like to join in the conversation?",
-                    fallback: "You are unable to choose a game",
-                    callback_id: "join_shared_channel",
-                    color: "#3AA3E3",
-                    attachment_type: "default",
-                    actions: [
-                        {
-                            name: "join_channel",
-                            text: "Join",
-                            type: "button",
-                            value: channel.team_id + "." + channel.id
-                        }
-                    ]
-                }
-            ]
-        });
-    }
 });
 
 controller.on('interactive_message_callback', function(bot, message) {

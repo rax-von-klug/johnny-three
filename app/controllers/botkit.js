@@ -144,10 +144,19 @@ controller.hears('available', 'direct_mention', function(bot, message) {
     var available_channels = [];
 
     controller.storage.teams.all(function(err, teams) {
+        if (err) {
+            console.log(err);
+        }
+
+        console.log(teams);
+
         for (var t in teams) {
             var team = teams[t];
+
             for(var i = 0; i < team.channels.length; i++) {
-                if (team.channels[i].shared === true) {
+                console.log(team.channels[i].shared);
+
+                if (team.channels[i].shared === "true") {
                     available_channels.push({
                         id: team.channels[i].id,
                         name: team.channels[i].name,

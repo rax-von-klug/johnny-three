@@ -140,7 +140,6 @@ controller.hears('share', 'direct_mention', function(bot, message) {
 });
 
 controller.hears('available', 'direct_mention', function(bot, message) {
-    console.log('I HEAR YOU!');
     var available_channels = [];
 
     controller.storage.teams.all(function(err, teams) {
@@ -148,16 +147,11 @@ controller.hears('available', 'direct_mention', function(bot, message) {
             console.log(err);
         }
 
-        console.log(teams);
-
         for (var t in teams) {
             var team = teams[t];
 
             for(var i = 0; i < team.channels.length; i++) {
-                console.log(team.channels[i].shared);
-
                 if (team.channels[i].shared === true) {
-                    console.log(team.channels[i]);
                     available_channels.push({
                         id: team.channels[i].id,
                         name: team.channels[i].name,
@@ -169,23 +163,25 @@ controller.hears('available', 'direct_mention', function(bot, message) {
         }
     });
 
+    console.log(available_channels);
+
     for(var x = 0; x < available_channels.length; x++) {
         var channel = available_channels[x];
         bot.reply(message, {
-            "text": "*" + channel.channel_name + "* in *" + channel.team_name + "* has been shared.",
-            "attachments": [
+            text: "*" + channel.channel_name + "* in *" + channel.team_name + "* has been shared.",
+            attachments: [
                 {
-                    "text": "Would you like to join in the conversation?",
-                    "fallback": "You are unable to choose a game",
-                    "callback_id": "join_shared_channel",
-                    "color": "#3AA3E3",
-                    "attachment_type": "default",
-                    "actions": [
+                    text: "Would you like to join in the conversation?",
+                    fallback: "You are unable to choose a game",
+                    callback_id: "join_shared_channel",
+                    color: "#3AA3E3",
+                    attachment_type: "default",
+                    actions: [
                         {
-                            "name": "join_channel",
-                            "text": "Join",
-                            "type": "button",
-                            "value": channel.team_id + "." + channel.id
+                            name: "join_channel",
+                            text: "Join",
+                            type: "button",
+                            value: channel.team_id + "." + channel.id
                         }
                     ]
                 }

@@ -139,7 +139,7 @@ controller.hears('share', 'direct_mention', function(bot, message) {
     });
 });
 
-controller.hears('available_channels', 'direct_mention', function(bot, message) {
+controller.hears('available', 'direct_mention', function(bot, message) {
     var available_channels = [];
 
     controller.storage.teams.all(function(err, teams) {

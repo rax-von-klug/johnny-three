@@ -54,7 +54,7 @@ module.exports = function(app) {
                   shared.joinedChannels.push({
                       id: team_data.id,
                       webhookUrl: team_data.webhooks.incomingUrl,
-                      postChannel: payload.channel.id
+                      postChannelId: payload.channel.id
                   });
 
                   slack.controller.storage.shares.save(shared);

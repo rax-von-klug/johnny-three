@@ -220,7 +220,7 @@ controller.hears('available', 'direct_mention', function(bot, message) {
             var team = teams[t];
 
             for(var i = 0; i < team.channels.length; i++) {
-                if (team.channels[i].shared === true) {
+                if (team.channels[i].shared === true && team.channels[i].id !== message.team) {
                     var channel = team.channels[i];
 
                     bot.reply(message, {

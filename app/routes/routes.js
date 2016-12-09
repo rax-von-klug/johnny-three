@@ -58,6 +58,12 @@ module.exports = function(app) {
                   });
 
                   slack.controller.storage.shares.save(shared);
+
+                  var bot = slack.controller.getExistingBot(team_data.token);
+                  bot.say({
+                      text: 'You have successfully joined the conversation!',
+                      channel: payload.channel.id
+                  });
               });
           });
       }

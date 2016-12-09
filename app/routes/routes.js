@@ -47,7 +47,7 @@ module.exports = function(app) {
           slack.controller.storage.shares.get(payload.actions[0].value, function(err, shared) {
               slack.controller.storage.teams.get(payload.team.id, function(err, team_data) {
                   console.log(shared);
-                  if (!_.isArray(shared.joinedChannels)) {
+                  if (!_.isArray(shared.joinedChannels) || shared.joinedChannels.length === 0) {
                     shared.joinedChannels = [];
                   }
 

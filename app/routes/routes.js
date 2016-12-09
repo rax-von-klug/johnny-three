@@ -41,11 +41,12 @@ module.exports = function(app) {
   });
 
   app.post('/interactive', function(req, res) {
-      console.log(req.body);
       console.log(JSON.parse(req.body.payload));
+      
+      var payload = JSON.parse(req.body.parse);
 
-      if ("join_shared_channel_".match(payload.callback_id)) {
-        console.log("YAY!!!");
+      if (payload.callback_id.includes("join_shared_channel_")) {
+          console.log("YAY!!!");
       }
   });
 

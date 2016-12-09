@@ -140,6 +140,7 @@ controller.hears('share', 'direct_mention', function(bot, message) {
 });
 
 controller.hears('available', 'direct_mention', function(bot, message) {
+    console.log('I HEAR YOU!');
     var available_channels = [];
 
     controller.storage.teams.all(function(err, teams) {

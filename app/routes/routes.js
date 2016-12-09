@@ -40,6 +40,14 @@ module.exports = function(app) {
     }
   });
 
+  app.post('/interactive', function(req, res) {
+      var payload = JSON.parse(req.body.payload);
+
+      if ("join_shared_channel_".match(payload.callback_id)) {
+        console.log("YAY!!!");
+      }
+  });
+
   app.post('/subscribe', function(req, res) {
     var channel = req.body.channel;
     var area_path = req.body.area_path;

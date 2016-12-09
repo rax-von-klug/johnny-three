@@ -138,6 +138,40 @@ controller.on('create_bot',function(bot,team) {
 
 //REACTIONS TO EVENTS==========================================================
 
+controller.hears('register', 'direct_mention', function(bot, message) {
+    var webhookUrl = message.text.substring(8).replace(/\s/g, '');
+    var urlStartIndex = webhookUrl.indexOf('<');
+    var urlEndIndex = webhookUrl.indexOf('|');
+
+    if(urlStartIndex !== -1 && urlEndIndex !== -1) {
+        webhookUrl = webhookUrl.substring(urlStartIndex + 1, urlEndIndex);
+    }
+
+    if (webhookUrl !== '') {
+        controller.storage.teams.get(bot.team_info.id, function(err, team){
+            team.webhooks = {
+                incomingUrl: webhookUrl
+            };
+
+            controller.storage.teams.save(team, function(err, team){
+                bot.reply(message, {
+                    "text": "Registered webhook!",
+                    "attachments": [{
+                        "text": webhookUrl + " was registered for your team"
+                    }]
+                });
+            });
+        });
+    } else {
+        bot.reply(message, {
+            "text": "Invalid register command",
+            "attachments": [{
+                "text": "Please use the following format: `register <webhook URL>`"
+            }]
+        });
+    }
+});
+
 // Handle events related to the websocket connection to Slack
 controller.on('rtm_open',function(bot) {
     console.log('** The RTM api just connected!');
